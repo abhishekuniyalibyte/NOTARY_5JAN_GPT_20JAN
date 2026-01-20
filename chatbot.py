@@ -30,7 +30,7 @@ from src.phase4_text_extraction import (
     TextNormalizer,
 )
 from src.phase5_legal_validation import LegalValidator
-from src.phase6_gap_detection import GapDetector
+from src.phase6_gap_detection import ActionPriority, Gap, GapDetector, GapType
 from src.phase7_data_update import DataUpdater
 from src.phase8_final_confirmation import FinalConfirmationEngine
 from src.phase9_certificate_generation import CertificateGenerator
@@ -593,6 +593,101 @@ def choose_classification(
     return None
 
 
+def is_result_ok(result: Optional[Dict[str, Any]]) -> bool:
+    return bool(result) and result.get("status") != "error"
+
+
+def is_keyword_ok(result: Optional[Dict[str, Any]]) -> bool:
+    return bool(result) and result.get("status") == "ok"
+
+
+def dedupe_preserve_order(items: List[str]) -> List[str]:
+    seen = set()
+    ordered = []
+    for item in items:
+        if not item or item in seen:
+            continue
+        ordered.append(item)
+        seen.add(item)
+    return ordered
+
+
+def detect_classification_conflict(
+    llm_result: Optional[Dict[str, Any]],
+    keyword_result: Optional[Dict[str, Any]],
+) -> Optional[str]:
+    if not is_result_ok(llm_result) or not is_keyword_ok(keyword_result):
+        return None
+    llm_is_cert = llm_result.get("is_certificate")
+    keyword_is_cert = keyword_result.get("is_certificate")
+    if llm_is_cert is False and keyword_is_cert is True:
+        return "Conflicto: LLM indica no certificado, keywords indican certificado."
+    if llm_is_cert is True and keyword_is_cert is True:
+        llm_type = llm_result.get("certificate_type")
+        keyword_type = keyword_result.get("certificate_type")
+        if llm_type and keyword_type and llm_type != keyword_type:
+            return "Conflicto: tipos de certificado difieren entre LLM y keywords."
+    return None
+
+
+def build_review_reasons(
+    llm_result: Optional[Dict[str, Any]],
+    keyword_result: Optional[Dict[str, Any]],
+    match_result: Optional[Dict[str, Any]],
+) -> List[str]:
+    reasons: List[str] = []
+
+    conflict = detect_classification_conflict(llm_result, keyword_result)
+    if conflict:
+        reasons.append(conflict)
+
+    if not is_result_ok(llm_result) and not is_keyword_ok(keyword_result):
+        reasons.append("No se pudo clasificar por contenido.")
+
+    if match_result:
+        status = match_result.get("status")
+        if status == "needs_review":
+            reasons.append(match_result.get("reason") or "Requiere verificación manual.")
+        elif status == "not_found":
+            reasons.append("No se encontró coincidencia en certificate_summary.json.")
+
+    return dedupe_preserve_order(reasons)
+
+
+def build_review_queue(per_file_data: Dict[str, Dict[str, Any]]) -> List[Dict[str, Any]]:
+    queue = []
+    for item in per_file_data.values():
+        if not item.get("review_required"):
+            continue
+        queue.append(
+            {
+                "filename": item.get("filename", "documento"),
+                "reasons": item.get("review_reasons", []) or [],
+            }
+        )
+    return queue
+
+
+def build_review_gaps(review_queue: List[Dict[str, Any]]) -> List[Gap]:
+    gaps = []
+    for entry in review_queue:
+        filename = entry.get("filename", "documento")
+        reasons = entry.get("reasons", []) or []
+        description = "; ".join(reasons) if reasons else "Documento requiere verificación manual."
+        gaps.append(
+            Gap(
+                gap_type=GapType.REVIEW_REQUIRED,
+                priority=ActionPriority.URGENT,
+                title=f"Revisar documento: {filename}",
+                description=description,
+                current_state="No verificado",
+                required_state="Verificado por notario o fuente oficial",
+                action_required="Verificar manualmente el documento",
+            )
+        )
+    return gaps
+
+
 def derive_intent_override(classification: Dict[str, Any]) -> Optional[Dict[str, str]]:
     if not is_positive_classification(classification):
         return None
@@ -899,6 +994,31 @@ def match_document(
     content_text: str = "",
     content_only: bool = False,
 ) -> Dict[str, Any]:
+    llm_ok = is_result_ok(llm_result)
+    keyword_ok = is_keyword_ok(keyword_result)
+    llm_non_certificate = llm_ok and llm_result.get("is_certificate") is False
+    keyword_certificate = keyword_ok and keyword_result.get("is_certificate") is True
+    if llm_non_certificate and keyword_certificate:
+        return {
+            "status": "needs_review",
+            "match_type": "llm_keyword_conflict",
+            "confidence": float(llm_result.get("confidence", 0.0)) if llm_ok else 0.0,
+            "reason": "Conflicto entre LLM (no certificado) y keywords (certificado).",
+            "matches": [],
+            "llm_result": llm_result,
+            "keyword_result": keyword_result,
+        }
+    if llm_non_certificate and not keyword_certificate:
+        return {
+            "status": "not_applicable",
+            "match_type": "non_certificate",
+            "confidence": float(llm_result.get("confidence", 0.0)) if llm_ok else 0.0,
+            "reason": "Documento clasificado como no certificado; match del dataset omitido.",
+            "matches": [],
+            "llm_result": llm_result,
+            "keyword_result": keyword_result,
+        }
+
     if not content_only:
         filename_keys = make_filename_keys(filename)
         matched_entries: List[Dict[str, Any]] = []
@@ -1013,16 +1133,28 @@ def match_document(
     filename_suggestions = top_fuzzy_matches(filename, summary_index["all_filenames_display"])
     customer_suggestions = top_fuzzy_matches(subject_name, summary_index["all_customers_display"])
 
+    has_certificate_signal = (
+        (llm_ok and llm_result.get("is_certificate") is True)
+        or (keyword_ok and keyword_result.get("is_certificate") is True)
+        or (not llm_ok and not keyword_ok)
+    )
+    status = "needs_review" if has_certificate_signal else "not_found"
+    reason = "No strong match found in certificate_summary.json."
+    if status == "needs_review":
+        reason = f"{reason} Requiere verificación manual."
+
     return {
-        "status": "not_found",
+        "status": status,
         "match_type": "none",
         "confidence": 0.0,
-        "reason": "No strong match found in certificate_summary.json.",
+        "reason": reason,
         "matches": [],
         "suggestions": {
             "filename": filename_suggestions,
             "customer": customer_suggestions,
         },
+        "llm_result": llm_result,
+        "keyword_result": keyword_result,
     }
 
 
@@ -1056,8 +1188,11 @@ def run_flow(
     search_settings: Dict[str, str],
     llm_settings: Dict[str, str],
     content_only: bool,
+    verification_sources: Optional[List[str]] = None,
 ) -> Dict[str, Any]:
     results: Dict[str, Any] = {}
+    if verification_sources is None:
+        verification_sources = []
 
     intent = CertificateIntentCapture.capture_intent_from_params(
         certificate_type=intent_inputs["certificate_type"],
@@ -1190,6 +1325,29 @@ def run_flow(
         collection.legal_requirements = requirements
         results["intent_override"] = intent_override
 
+    for file_info in uploaded_files:
+        path = file_info["path"]
+        per_file = per_file_data.get(path, {})
+        doc_text = per_file.get("doc_text", "")
+        llm_result = per_file.get("llm_result")
+        keyword_result = per_file.get("keyword_result")
+
+        match_result = match_document(
+            filename=file_info["filename"],
+            subject_name=intent.subject_name,
+            extracted_company=extracted_company,
+            purpose_value=intent.purpose.value,
+            summary_index=summary_index,
+            llm_result=llm_result,
+            keyword_result=keyword_result,
+            content_text=doc_text,
+            content_only=content_only,
+        )
+        review_reasons = build_review_reasons(llm_result, keyword_result, match_result)
+        per_file["match_result"] = match_result
+        per_file["review_required"] = bool(review_reasons)
+        per_file["review_reasons"] = review_reasons
+
     results["phase1"] = intent.get_display_summary()
     results["phase2"] = requirements.get_summary()
     results["phase3"] = collection.get_summary()
@@ -1198,10 +1356,20 @@ def run_flow(
     results["phase5"] = validation.get_summary()
 
     gap_report = GapDetector.analyze(validation)
+    review_queue = build_review_queue(per_file_data)
+    review_gaps = build_review_gaps(review_queue)
+    if review_gaps:
+        gap_report.gaps.extend(review_gaps)
+        gap_report.calculate_summary()
     results["phase6"] = gap_report.get_summary()
 
     update_result = DataUpdater.create_update_session(gap_report, collection)
     update_result.updated_extraction_result = extraction
+    update_result.review_required = review_queue
+    if not verification_sources and (gap_report.gaps or review_queue):
+        update_result.system_note = (
+            "Fuentes oficiales no configuradas; se requiere verificación manual o carga de documentos."
+        )
     results["phase7"] = update_result.get_summary()
 
     confirmation = FinalConfirmationEngine.confirm(requirements, update_result)
@@ -1227,18 +1395,9 @@ def run_flow(
         llm_result = per_file.get("llm_result")
         keyword_result = per_file.get("keyword_result")
         chosen_classification = per_file.get("chosen_classification")
-
-        match_result = match_document(
-            filename=original_filename,
-            subject_name=intent.subject_name,
-            extracted_company=extracted_company,
-            purpose_value=intent.purpose.value,
-            summary_index=summary_index,
-            llm_result=llm_result,
-            keyword_result=keyword_result,
-            content_text=doc_text,
-            content_only=content_only,
-        )
+        match_result = per_file.get("match_result") or {}
+        review_required = per_file.get("review_required", False)
+        review_reasons = per_file.get("review_reasons", [])
 
         validation_status = "unknown"
         validation_reason = "No validation available."
@@ -1330,6 +1489,8 @@ def run_flow(
                 "match": match_result,
                 "llm_result": llm_result,
                 "keyword_result": keyword_result,
+                "review_required": review_required,
+                "review_reasons": review_reasons,
                 "doc_text": qa_text,
                 "extraction_success": extraction_success,
                 "extraction_error": extraction_error,
@@ -1403,6 +1564,8 @@ def render_match_result(match_result: Dict[str, Any]) -> None:
 
     if status == "correct":
         st.success(f"Correct: {reason} (confidence {confidence:.2f})")
+    elif status == "not_applicable":
+        st.info(f"Not applicable: {reason} (confidence {confidence:.2f})")
     elif status == "needs_review":
         st.warning(f"Needs review: {reason} (confidence {confidence:.2f})")
     else:
@@ -1676,11 +1839,16 @@ def main() -> None:
     if results is None:
         return
 
+    output_dir = Path(__file__).resolve().parent
+
     st.subheader("Document analysis")
     file_results = results.get("file_results", [])
     if file_results:
         summary_rows = []
         report_rows = []
+        review_files = [fr for fr in file_results if fr.get("review_required")]
+        if review_files:
+            st.warning(f"{len(review_files)} documento(s) requieren revisión manual.")
         for file_result in file_results:
             validation = file_result.get("validation", {})
             match_result = file_result.get("match") or {}
@@ -1695,6 +1863,7 @@ def main() -> None:
                     "validation": validation.get("status"),
                     "validation_reason": validation.get("reason"),
                     "catalog_match": catalog.get("match_status"),
+                    "review_required": file_result.get("review_required"),
                 }
             )
             report_rows.append(
@@ -1730,6 +1899,8 @@ def main() -> None:
                     "catalog_match_status": catalog.get("match_status"),
                     "catalog_match_score": catalog.get("match_score"),
                     "catalog_type_mismatch": catalog.get("type_mismatch"),
+                    "review_required": file_result.get("review_required"),
+                    "review_reasons": "; ".join(file_result.get("review_reasons") or []),
                 }
             )
         st.dataframe(summary_rows, width="stretch")
@@ -1738,12 +1909,18 @@ def main() -> None:
             writer = csv.DictWriter(output, fieldnames=list(report_rows[0].keys()))
             writer.writeheader()
             writer.writerows(report_rows)
-            st.download_button(
+            csv_text = output.getvalue()
+            save_report = st.download_button(
                 "Download file analysis report (CSV)",
-                output.getvalue().encode("utf-8"),
+                csv_text.encode("utf-8"),
                 file_name="notary_file_report.csv",
                 mime="text/csv",
             )
+            if save_report:
+                (output_dir / "notary_file_report.csv").write_text(
+                    csv_text,
+                    encoding="utf-8",
+                )
         detailed_lines = [
             "Notarial Chatbot Flow - Document Analysis Report",
             f"Generated: {datetime.now().isoformat(timespec='seconds')}",
@@ -1815,6 +1992,11 @@ def main() -> None:
                 )
                 detailed_lines.append("Match details:")
                 detailed_lines.append(format_json_block(match_result))
+            if file_result.get("review_required"):
+                detailed_lines.append("Review required: yes")
+                if file_result.get("review_reasons"):
+                    detailed_lines.append("Review reasons:")
+                    detailed_lines.append(format_json_block(file_result.get("review_reasons")))
             if file_result.get("llm_result"):
                 detailed_lines.append("LLM classification:")
                 detailed_lines.append(format_json_block(file_result.get("llm_result")))
@@ -1823,12 +2005,17 @@ def main() -> None:
                 detailed_lines.append(format_json_block(file_result.get("keyword_result")))
             detailed_lines.append("-" * 80)
         detailed_report = "\n".join(detailed_lines)
-        st.download_button(
+        save_details = st.download_button(
             "Download detailed file report (TXT)",
             detailed_report.encode("utf-8"),
             file_name="notary_file_details.txt",
             mime="text/plain",
         )
+        if save_details:
+            (output_dir / "notary_file_details.txt").write_text(
+                detailed_report,
+                encoding="utf-8",
+            )
 
         for file_result in file_results:
             filename = file_result.get("filename", "document")
@@ -1898,6 +2085,28 @@ def main() -> None:
         ("Phase 10", "phase10"),
         ("Phase 11", "phase11"),
     ]
+
+    phase_lines = [
+        "Notarial Chatbot Flow - Phase Outputs",
+        f"Generated: {datetime.now().isoformat(timespec='seconds')}",
+        "",
+    ]
+    for label, key in phase_sections:
+        phase_lines.append(label)
+        phase_lines.append(str(results.get(key, "No output")))
+        phase_lines.append("-" * 80)
+    phase_output_text = "\n".join(phase_lines)
+    save_phases = st.download_button(
+        "Download phase outputs (TXT)",
+        phase_output_text.encode("utf-8"),
+        file_name="notary_phase_outputs.txt",
+        mime="text/plain",
+    )
+    if save_phases:
+        (output_dir / "notary_phase_outputs.txt").write_text(
+            phase_output_text,
+            encoding="utf-8",
+        )
 
     for label, key in phase_sections:
         with st.expander(label, expanded=False):

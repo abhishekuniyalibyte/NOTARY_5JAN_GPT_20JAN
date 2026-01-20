@@ -373,7 +373,8 @@ class FinalConfirmationEngine:
         report.compliance_checks = FinalConfirmationEngine._create_compliance_checks(
             validation_matrix,
             gap_report,
-            legal_requirements
+            legal_requirements,
+            update_result
         )
 
         print(f"   ✓ {len(report.compliance_checks)} verificaciones realizadas")
@@ -391,7 +392,8 @@ class FinalConfirmationEngine:
     def _create_compliance_checks(
         validation_matrix: ValidationMatrix,
         gap_report: GapAnalysisReport,
-        legal_requirements: LegalRequirements
+        legal_requirements: LegalRequirements,
+        update_result: Optional[UpdateAttemptResult] = None
     ) -> List[ComplianceCheck]:
         """Create detailed compliance checks"""
         checks = []
@@ -409,6 +411,18 @@ class FinalConfirmationEngine:
             legal_basis="Art. 248, 249",
             blocking=True
         ))
+
+        review_items = update_result.review_required if update_result else []
+        if review_items:
+            checks.append(ComplianceCheck(
+                check_name="Documentos con revisión pendiente",
+                check_category="review",
+                is_compliant=False,
+                severity=ValidationSeverity.WARNING,
+                details=f"{len(review_items)} documento(s) requieren verificación manual",
+                legal_basis="Revisión manual",
+                blocking=False
+            ))
 
         # Check 2: No expired documents (derive from validation issues)
         expired_docs = [
@@ -530,9 +544,23 @@ class FinalConfirmationEngine:
     def _make_decision(report: FinalConfirmationReport):
         """Make final certificate generation decision"""
         report.calculate_summary()
+        review_failed = any(
+            not check.is_compliant and check.check_category == "review"
+            for check in report.compliance_checks
+        )
 
         # Decision logic
         if report.blocking_issues == 0 and report.critical_issues == 0:
+            if review_failed:
+                report.compliance_level = ComplianceLevel.PARTIALLY_COMPLIANT
+                report.certificate_decision = CertificateDecision.REQUIRES_REVIEW
+                report.decision_rationale = (
+                    "Documentos requieren verificación manual antes de emitir certificado."
+                )
+                for check in report.compliance_checks:
+                    if not check.is_compliant and check.check_category == "review":
+                        report.remaining_issues.append(f"{check.check_name}: {check.details}")
+                return
             if report.warnings == 0:
                 # Perfect compliance
                 report.compliance_level = ComplianceLevel.FULLY_COMPLIANT

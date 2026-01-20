@@ -44,6 +44,7 @@ class GapType(Enum):
     INCORRECT_FORMAT = "incorrect_format"
     LEGAL_NONCOMPLIANCE = "legal_noncompliance"
     CATALOG_MISMATCH = "catalog_mismatch"
+    REVIEW_REQUIRED = "review_required"
 
 
 class ActionPriority(Enum):

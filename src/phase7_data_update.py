@@ -13,7 +13,7 @@ to auto-fetch public registry information or accepting updated uploads.
 """
 
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 from datetime import datetime, timedelta
 from enum import Enum
 import json
@@ -129,6 +129,8 @@ class UpdateAttemptResult:
     updates: List[DocumentUpdate] = field(default_factory=list)
     updated_collection: Optional[DocumentCollection] = None
     updated_extraction_result: Optional[CollectionExtractionResult] = None
+    review_required: List[Dict[str, Any]] = field(default_factory=list)
+    system_note: Optional[str] = None
 
     # Summary stats
     total_gaps: int = 0
@@ -164,6 +166,8 @@ class UpdateAttemptResult:
             "successful_updates": self.successful_updates,
             "failed_updates": self.failed_updates,
             "not_attempted": self.not_attempted,
+            "review_required": self.review_required,
+            "system_note": self.system_note,
             "timestamp": self.timestamp.isoformat()
         }
 
@@ -196,6 +200,18 @@ class UpdateAttemptResult:
 ⏰ Timestamp: {self.timestamp.strftime('%Y-%m-%d %H:%M:%S')}
 
 """
+        if self.system_note:
+            summary += f"\nℹ️  {self.system_note}\n"
+
+        if self.review_required:
+            summary += "\n🔍 DOCUMENTOS PARA REVISIÓN MANUAL:\n"
+            summary += "-" * 70 + "\n"
+            for entry in self.review_required:
+                filename = entry.get("filename", "documento")
+                reasons = entry.get("reasons", []) or []
+                summary += f"   • {filename}\n"
+                for reason in reasons:
+                    summary += f"     - {reason}\n"
 
         if self.successful_updates > 0:
             summary += "\n✅ ACTUALIZACIONES EXITOSAS:\n"
