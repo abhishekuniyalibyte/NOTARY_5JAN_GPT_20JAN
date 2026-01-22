@@ -1,224 +1,14 @@
 Notarial Chatbot Flow - Document Analysis Report
-Generated: 2026-01-20T17:19:37
-Total files: 7
+Generated: 2026-01-22T17:13:17
+Total files: 1
 
-Details: BCU AZILI S.A. 2018.06 DDJJ.pdf
-Type: non_certificate (source: content)
-Validation: not_required - Document type is not required for the selected certificate.
-Dataset match:
-needs_review: Conflicto entre LLM (no certificado) y keywords (certificado). (confidence 0.0)
-Match details:
-{
-  "status": "needs_review",
-  "match_type": "llm_keyword_conflict",
-  "confidence": 0.0,
-  "reason": "Conflicto entre LLM (no certificado) y keywords (certificado).",
-  "matches": [],
-  "llm_result": {
-    "is_certificate": false,
-    "certificate_type": "non_certificate",
-    "purpose": "",
-    "confidence": 0,
-    "reason": "The document text does not appear to be a certificate, but rather a form or template for a declaration or statement, specifically a \"ZURMULARIO B\" form related to Ley 18.930 and Ley 19.484, and does not match any known certificate type.",
-    "status": "ok"
-  },
-  "keyword_result": {
-    "status": "ok",
-    "is_certificate": true,
-    "certificate_type": "personeria_representacion_representacion",
-    "purpose": "bse",
-    "confidence": 0.5,
-    "reason": "Matched attributes: domicilio, ley, poder"
-  }
-}
-Review required: yes
-Review reasons:
-[
-  "Conflicto: LLM indica no certificado, keywords indican certificado.",
-  "Conflicto entre LLM (no certificado) y keywords (certificado)."
-]
-LLM classification:
-{
-  "is_certificate": false,
-  "certificate_type": "non_certificate",
-  "purpose": "",
-  "confidence": 0,
-  "reason": "The document text does not appear to be a certificate, but rather a form or template for a declaration or statement, specifically a \"ZURMULARIO B\" form related to Ley 18.930 and Ley 19.484, and does not match any known certificate type.",
-  "status": "ok"
-}
-Keyword classification:
-{
-  "status": "ok",
-  "is_certificate": true,
-  "certificate_type": "personeria_representacion_representacion",
-  "purpose": "bse",
-  "confidence": 0.5,
-  "reason": "Matched attributes: domicilio, ley, poder"
-}
---------------------------------------------------------------------------------
-Details: BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf
-Type: firma (source: content)
-Validation: not_required - Document type is not required for the selected certificate.
-Dataset match:
-correct: LLM classified document type matches summary taxonomy. (confidence 0.8)
-Match details:
-{
-  "status": "correct",
-  "match_type": "llm_only",
-  "confidence": 0.8,
-  "reason": "LLM classified document type matches summary taxonomy.",
-  "matches": [],
-  "llm_result": {
-    "is_certificate": true,
-    "certificate_type": "firma",
-    "purpose": "registro",
-    "confidence": 0.8,
-    "reason": "The document appears to be a notarial certificate of a signature, with a legalization and apostille from the Colegio de Escribanos de la Ciudad de Buenos Aires, which suggests a purpose related to registration or authentication.",
-    "status": "ok"
-  }
-}
-Review required: yes
-Review reasons:
-[
-  "Conflicto: tipos de certificado difieren entre LLM y keywords."
-]
-LLM classification:
-{
-  "is_certificate": true,
-  "certificate_type": "firma",
-  "purpose": "registro",
-  "confidence": 0.8,
-  "reason": "The document appears to be a notarial certificate of a signature, with a legalization and apostille from the Colegio de Escribanos de la Ciudad de Buenos Aires, which suggests a purpose related to registration or authentication.",
-  "status": "ok"
-}
-Keyword classification:
-{
-  "status": "ok",
-  "is_certificate": true,
-  "certificate_type": "personeria_representacion_representacion",
-  "purpose": "registro",
-  "confidence": 0.4,
-  "reason": "Matched attributes: domicilio, ley"
-}
---------------------------------------------------------------------------------
-Details: Certificacion control leyes 18930 y 19484.doc
-Type: personeria (source: content)
-Validation: invalid - No se encontró CI en la cédula de identidad.
-Validation issues:
-[
-  {
-    "field": "ci",
-    "issue_type": "missing_field",
-    "severity": "error",
-    "description": "No se encontró CI en la cédula de identidad.",
-    "legal_basis": "Art. 130",
-    "recommendation": "Verificar que el documento incluya este dato."
-  }
-]
-Dataset match:
-correct: LLM classified document type matches summary taxonomy. (confidence 0.8)
-Match details:
-{
-  "status": "correct",
-  "match_type": "llm_only",
-  "confidence": 0.8,
-  "reason": "LLM classified document type matches summary taxonomy.",
-  "matches": [],
-  "llm_result": {
-    "is_certificate": true,
-    "certificate_type": "personeria",
-    "purpose": "abitab",
-    "confidence": 0.8,
-    "reason": "The document certifies the person's powers and compliance with laws 18930 and 19484, which is consistent with the 'personeria' category, and mentions presentation to an unspecified party, which could be 'abitab'.",
-    "status": "ok"
-  }
-}
-Review required: yes
-Review reasons:
-[
-  "Conflicto: tipos de certificado difieren entre LLM y keywords."
-]
-LLM classification:
-{
-  "is_certificate": true,
-  "certificate_type": "personeria",
-  "purpose": "abitab",
-  "confidence": 0.8,
-  "reason": "The document certifies the person's powers and compliance with laws 18930 and 19484, which is consistent with the 'personeria' category, and mentions presentation to an unspecified party, which could be 'abitab'.",
-  "status": "ok"
-}
-Keyword classification:
-{
-  "status": "ok",
-  "is_certificate": true,
-  "certificate_type": "otros",
-  "purpose": "",
-  "confidence": 0.4,
-  "reason": "Matched attributes: ley, leyes"
-}
---------------------------------------------------------------------------------
-Details: Certificacion personeria, representación, leyes.doc
-Type: personeria_representacion_representacion (source: content)
-Validation: invalid - No se encontró CI en la cédula de identidad.
-Validation issues:
-[
-  {
-    "field": "ci",
-    "issue_type": "missing_field",
-    "severity": "error",
-    "description": "No se encontró CI en la cédula de identidad.",
-    "legal_basis": "Art. 130",
-    "recommendation": "Verificar que el documento incluya este dato."
-  }
-]
-Dataset match:
-correct: Matched attributes: domicilio, ley, leyes (confidence 0.5)
-Match details:
-{
-  "status": "correct",
-  "match_type": "content_keywords",
-  "confidence": 0.5,
-  "reason": "Matched attributes: domicilio, ley, leyes",
-  "matches": [],
-  "llm_result": {
-    "is_certificate": true,
-    "certificate_type": "personeria_representacion_representacion",
-    "purpose": "bps, dgi",
-    "confidence": 0.9,
-    "reason": "The document contains a certification of a company's personeria, representation and laws, specifically mentioning compliance with laws 18930 and 19484, and is intended for presentation to BPS and/or DGI.",
-    "status": "ok"
-  },
-  "keyword_result": {
-    "status": "ok",
-    "is_certificate": true,
-    "certificate_type": "personeria_representacion_representacion",
-    "purpose": "registro",
-    "confidence": 0.5,
-    "reason": "Matched attributes: domicilio, ley, leyes"
-  }
-}
-LLM classification:
-{
-  "is_certificate": true,
-  "certificate_type": "personeria_representacion_representacion",
-  "purpose": "bps, dgi",
-  "confidence": 0.9,
-  "reason": "The document contains a certification of a company's personeria, representation and laws, specifically mentioning compliance with laws 18930 and 19484, and is intended for presentation to BPS and/or DGI.",
-  "status": "ok"
-}
-Keyword classification:
-{
-  "status": "ok",
-  "is_certificate": true,
-  "certificate_type": "personeria_representacion_representacion",
-  "purpose": "registro",
-  "confidence": 0.5,
-  "reason": "Matched attributes: domicilio, ley, leyes"
-}
---------------------------------------------------------------------------------
 Details: Declaratoria 17.904.pdf
-Type: firma_personeria_representacion_representacion (source: content)
+Type: firma_representacion_representacion (source: content)
+Type detail: selected=firma_representacion_representacion; source=content; detected=n/a; llm=firma_representacion_representacion (0.90, ok); keyword=personeria_representacion_representacion (0.50, ok)
+Detected type (filename): 
+File info: format=pdf, size_bytes=1622377, processing_status=indexed, is_scanned=False
 Validation: unknown - No validation available.
+Error flag: no
 Dataset match:
 correct: LLM classified document type matches summary taxonomy. (confidence 0.9)
 Match details:
@@ -230,55 +20,10 @@ Match details:
   "matches": [],
   "llm_result": {
     "is_certificate": true,
-    "certificate_type": "firma_personeria_representacion_representacion",
+    "certificate_type": "firma_representacion_representacion",
     "purpose": "registro",
     "confidence": 0.9,
-    "reason": "The document contains a certification of a signature and a declaration of representation of a company, including details about the company's constitution, bylaws, and board of directors, which matches the characteristics of the 'firma_personeria_representacion_representacion' category, specifically for registration purposes.",
-    "status": "ok"
-  }
-}
-Review required: yes
-Review reasons:
-[
-  "Conflicto: tipos de certificado difieren entre LLM y keywords."
-]
-LLM classification:
-{
-  "is_certificate": true,
-  "certificate_type": "firma_personeria_representacion_representacion",
-  "purpose": "registro",
-  "confidence": 0.9,
-  "reason": "The document contains a certification of a signature and a declaration of representation of a company, including details about the company's constitution, bylaws, and board of directors, which matches the characteristics of the 'firma_personeria_representacion_representacion' category, specifically for registration purposes.",
-  "status": "ok"
-}
-Keyword classification:
-{
-  "status": "ok",
-  "is_certificate": true,
-  "certificate_type": "personeria_representacion_representacion",
-  "purpose": "registro",
-  "confidence": 0.5,
-  "reason": "Matched attributes: domicilio, ley, poder"
-}
---------------------------------------------------------------------------------
-Details: Estatuto Azili S.A..pdf
-Type: firma_representacion_representacion (source: content)
-Validation: not_required - Document type is not required for the selected certificate.
-Dataset match:
-correct: LLM classified document type matches summary taxonomy. (confidence 0.8)
-Match details:
-{
-  "status": "correct",
-  "match_type": "llm_only",
-  "confidence": 0.8,
-  "reason": "LLM classified document type matches summary taxonomy.",
-  "matches": [],
-  "llm_result": {
-    "is_certificate": true,
-    "certificate_type": "firma_representacion_representacion",
-    "purpose": "zona franca",
-    "confidence": 0.8,
-    "reason": "The document appears to be a notarial act related to the establishment of a company called 'AZILI SOCIEDAD ANONIMA' and its statutes, which involves zona franca activities.",
+    "reason": "The document contains a notarial certification of a signature and representation of a company, including details about the company's constitution, bylaws, and board of directors, which matches the characteristics of the 'firma_representacion_representacion' category, specifically for registration purposes.",
     "status": "ok"
   }
 }
@@ -291,9 +36,9 @@ LLM classification:
 {
   "is_certificate": true,
   "certificate_type": "firma_representacion_representacion",
-  "purpose": "zona franca",
-  "confidence": 0.8,
-  "reason": "The document appears to be a notarial act related to the establishment of a company called 'AZILI SOCIEDAD ANONIMA' and its statutes, which involves zona franca activities.",
+  "purpose": "registro",
+  "confidence": 0.9,
+  "reason": "The document contains a notarial certification of a signature and representation of a company, including details about the company's constitution, bylaws, and board of directors, which matches the characteristics of the 'firma_representacion_representacion' category, specifically for registration purposes.",
   "status": "ok"
 }
 Keyword classification:
@@ -301,48 +46,8 @@ Keyword classification:
   "status": "ok",
   "is_certificate": true,
   "certificate_type": "personeria_representacion_representacion",
-  "purpose": "bse",
-  "confidence": 0.8,
-  "reason": "Matched attributes: domicilio, domicilios, ley, objeto, poder, poderes"
-}
---------------------------------------------------------------------------------
-Details: factura_9148035_PDF DGI (1).pdf
-Type: non_certificate (source: content)
-Validation: not_required - Document type is not required for the selected certificate.
-Dataset match:
-not_applicable: Documento clasificado como no certificado; match del dataset omitido. (confidence 0.0)
-Match details:
-{
-  "status": "not_applicable",
-  "match_type": "non_certificate",
-  "confidence": 0.0,
-  "reason": "Documento clasificado como no certificado; match del dataset omitido.",
-  "matches": [],
-  "llm_result": {
-    "is_certificate": false,
-    "certificate_type": "non_certificate",
-    "purpose": "",
-    "confidence": 0,
-    "reason": "The document text appears to be an e-invoice and does not match any known certificate categories.",
-    "status": "ok"
-  },
-  "keyword_result": {
-    "status": "error",
-    "message": "No keyword match found."
-  }
-}
-LLM classification:
-{
-  "is_certificate": false,
-  "certificate_type": "non_certificate",
-  "purpose": "",
-  "confidence": 0,
-  "reason": "The document text appears to be an e-invoice and does not match any known certificate categories.",
-  "status": "ok"
-}
-Keyword classification:
-{
-  "status": "error",
-  "message": "No keyword match found."
+  "purpose": "registro",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, poder"
 }
 --------------------------------------------------------------------------------
