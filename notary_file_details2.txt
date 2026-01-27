@@ -1,13 +1,13 @@
 Notarial Chatbot Flow - Document Analysis Report
-Generated: 2026-01-27T12:56:45
+Generated: 2026-01-27T12:36:02
 Total files: 7
 
-Details: 1.pdf
+Details: BCU AZILI S.A. 2018.06 DDJJ.pdf
 Type: personeria_representacion_representacion (source: content)
-Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
-Detected type (filename): 
+Type detail: selected=personeria_representacion_representacion; source=content; detected=declaracion_jurada; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
+Detected type (filename): declaracion_jurada
 File info: format=pdf, size_bytes=4386180, processing_status=indexed, is_scanned=False
-Validation: unknown - No validation available.
+Validation: not_required - Document type is not required for the selected certificate.
 Error flag: yes
 Error reasons:
 [
@@ -50,12 +50,12 @@ Keyword classification:
   "reason": "Matched attributes: domicilio, ley, poder"
 }
 --------------------------------------------------------------------------------
-Details: 2.pdf
+Details: BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf
 Type: personeria_representacion_representacion (source: content)
-Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.40, ok)
-Detected type (filename): 
+Type detail: selected=personeria_representacion_representacion; source=content; detected=declaracion_jurada; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.40, ok)
+Detected type (filename): declaracion_jurada
 File info: format=pdf, size_bytes=1023979, processing_status=indexed, is_scanned=False
-Validation: unknown - No validation available.
+Validation: not_required - Document type is not required for the selected certificate.
 Error flag: yes
 Error reasons:
 [
@@ -98,12 +98,12 @@ Keyword classification:
   "reason": "Matched attributes: domicilio, ley"
 }
 --------------------------------------------------------------------------------
-Details: 3.doc
+Details: Certificacion control leyes 18930 y 19484.doc
 Type: otros (source: content)
-Type detail: selected=otros; source=content; detected=n/a; llm=n/a (n/a, error); keyword=otros (0.40, ok)
-Detected type (filename): 
+Type detail: selected=otros; source=content; detected=cedula_identidad; llm=n/a (n/a, error); keyword=otros (0.40, ok)
+Detected type (filename): cedula_identidad
 File info: format=doc, size_bytes=35840, processing_status=indexed, is_scanned=False
-Validation: unknown - No validation available.
+Validation: not_required - Document type is not required for the selected certificate.
 Error flag: yes
 Error reasons:
 [
@@ -146,12 +146,12 @@ Keyword classification:
   "reason": "Matched attributes: ley, leyes"
 }
 --------------------------------------------------------------------------------
-Details: 4.doc
+Details: Certificacion personeria, representación, leyes.doc
 Type: personeria_representacion_representacion (source: content)
-Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
-Detected type (filename): 
+Type detail: selected=personeria_representacion_representacion; source=content; detected=cedula_identidad; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
+Detected type (filename): cedula_identidad
 File info: format=doc, size_bytes=37888, processing_status=indexed, is_scanned=False
-Validation: unknown - No validation available.
+Validation: not_required - Document type is not required for the selected certificate.
 Error flag: yes
 Error reasons:
 [
@@ -194,7 +194,7 @@ Keyword classification:
   "reason": "Matched attributes: domicilio, ley, leyes"
 }
 --------------------------------------------------------------------------------
-Details: 5.pdf
+Details: Declaratoria 17.904.pdf
 Type: personeria_representacion_representacion (source: content)
 Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
 Detected type (filename): 
@@ -242,12 +242,12 @@ Keyword classification:
   "reason": "Matched attributes: domicilio, ley, poder"
 }
 --------------------------------------------------------------------------------
-Details: 6.pdf
+Details: Estatuto Azili S.A..pdf
 Type: personeria_representacion_representacion (source: content)
-Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.80, ok)
-Detected type (filename): 
+Type detail: selected=personeria_representacion_representacion; source=content; detected=estatuto; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.80, ok)
+Detected type (filename): estatuto
 File info: format=pdf, size_bytes=7967354, processing_status=indexed, is_scanned=False
-Validation: unknown - No validation available.
+Validation: valid - Document passes validation checks.
 Error flag: yes
 Error reasons:
 [
@@ -290,16 +290,36 @@ Keyword classification:
   "reason": "Matched attributes: domicilio, domicilios, ley, objeto, poder, poderes"
 }
 --------------------------------------------------------------------------------
-Details: 7.pdf
+Details: factura_9148035_PDF DGI (1).pdf
 Type: unknown (source: content_missing)
-Type detail: selected=unknown; source=content_missing; detected=n/a; llm=n/a (n/a, error); keyword=n/a (n/a, error)
-Detected type (filename): 
+Type detail: selected=unknown; source=content_missing; detected=certificado_dgi; llm=n/a (n/a, error); keyword=n/a (n/a, error)
+Detected type (filename): certificado_dgi
 File info: format=pdf, size_bytes=141460, processing_status=indexed, is_scanned=False
-Validation: unknown - No validation available.
+Validation: invalid - Certificado de situación tributaria (DGI) está vencido (fecha 2020-09-23).
 Error flag: yes
 Error reasons:
 [
-  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}",
+  "validation_status=invalid"
+]
+Validation issues:
+[
+  {
+    "field": "certificado_dgi_expiry",
+    "issue_type": "expired_document",
+    "severity": "error",
+    "description": "Certificado de situación tributaria (DGI) está vencido (fecha 2020-09-23).",
+    "legal_basis": "Ley 17904",
+    "recommendation": "Actualizar documento con antigüedad menor a 90 días."
+  },
+  {
+    "field": "rut",
+    "issue_type": "missing_field",
+    "severity": "error",
+    "description": "No se encontró RUT en el certificado DGI.",
+    "legal_basis": "Ley 17904",
+    "recommendation": "Verificar que el documento incluya este dato."
+  }
 ]
 Dataset match:
 needs_review: No strong match found in certificate_summary.json. Requiere verificación manual. (confidence 0.0)
@@ -313,24 +333,24 @@ Match details:
   "suggestions": {
     "filename": [
       [
-        "27369.pdf",
-        0.7142857142857143
+        "factura_9148035_PDF DGI (1).pdf",
+        1.0
       ],
       [
-        "BPS.pdf",
+        "Factura 941.pdf",
+        0.6818181818181818
+      ],
+      [
+        "FACTURAS 960 Y 961.pdf",
         0.6666666666666666
       ],
       [
-        "CUD.PDF",
+        "Factura 1083.pdf",
         0.6666666666666666
       ],
       [
-        "DGI.pdf",
-        0.6666666666666666
-      ],
-      [
-        "RUT.pdf",
-        0.6666666666666666
+        "Factura 984.pdf",
+        0.6363636363636364
       ]
     ],
     "customer": [

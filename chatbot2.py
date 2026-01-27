@@ -20,7 +20,7 @@ from groq import Groq
 
 from src.phase1_certificate_intent import CertificateIntentCapture
 from src.phase2_legal_requirements import LegalRequirementsEngine
-from src.phase3_document_intake import DocumentIntake, FileFormat
+from src.phase3_document_intake import DocumentIntake, DocumentTypeDetector, FileFormat
 from src.phase4_text_extraction import (
     CollectionExtractionResult,
     DataExtractor,
@@ -463,6 +463,15 @@ def process_collection_with_llm(
                     ocr_error = str(exc)
 
         normalized_text = TextNormalizer.normalize_text(raw_text or "")
+
+        # If filename-based detection failed, try content-based detection so users can name files anything.
+        if not document.detected_type and normalized_text:
+            inferred_type = DocumentTypeDetector.detect_from_text(normalized_text)
+            if inferred_type:
+                document.detected_type = inferred_type
+                if isinstance(document.metadata, dict):
+                    document.metadata["detected_type_source"] = "content"
+
         extraction_method = base_method if base_method in ("text", "ocr") else "none"
         extracted_data = ExtractedData(
             document_type=document.detected_type,
@@ -2062,7 +2071,7 @@ def main() -> None:
                 f"{format_report_value(file_result.get('document_type_detail'))}"
             )
             detailed_lines.append(
-                "Detected type (filename): "
+                "Detected type (auto): "
                 f"{format_report_value(file_result.get('document_type_detected'))}"
             )
             file_size_bytes = file_result.get("file_size_bytes")
@@ -2173,7 +2182,7 @@ def main() -> None:
                     f"(source: {file_result.get('type_source')})"
                 )
                 st.write(
-                    "Detected type (filename): "
+                    "Detected type (auto): "
                     f"{file_result.get('document_type_detected')}"
                 )
                 st.write(

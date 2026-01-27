@@ -200,8 +200,10 @@ class DocumentCollection:
 
 class DocumentTypeDetector:
     """
-    Detects document types based on filename patterns.
-    This is a simple heuristic-based detector that will be enhanced in Phase 4.
+    Detects document types using simple keyword heuristics.
+
+    - Phase 3: filename-based detection (fast, best-effort)
+    - Phase 4+: content-based detection fallback (works even when users name files "1.pdf")
     """
 
     # Keyword patterns for document type detection
@@ -221,28 +223,63 @@ class DocumentTypeDetector:
     }
 
     @staticmethod
+    def _normalize_for_match(value: str) -> str:
+        if not value:
+            return ""
+        normalized = unicodedata.normalize("NFKD", value)
+        normalized = normalized.encode("ascii", "ignore").decode("ascii")
+        normalized = normalized.lower()
+        normalized = re.sub(r"[^a-z0-9]+", " ", normalized)
+        return " ".join(normalized.split())
+
+    @staticmethod
+    def _score_keyword_matches(text_norm: str) -> Dict[DocumentType, int]:
+        if not text_norm:
+            return {}
+        tokens = set(text_norm.split())
+
+        scores: Dict[DocumentType, int] = {}
+        for doc_type, keywords in DocumentTypeDetector.PATTERNS.items():
+            score = 0
+            for keyword in keywords:
+                keyword_norm = DocumentTypeDetector._normalize_for_match(keyword)
+                if not keyword_norm:
+                    continue
+                if " " in keyword_norm:
+                    if keyword_norm in text_norm:
+                        score += len(keyword_norm.replace(" ", ""))  # Longer phrase = higher score
+                else:
+                    if keyword_norm in tokens:
+                        score += len(keyword_norm)  # Longer token = higher score
+            if score > 0:
+                scores[doc_type] = score
+        return scores
+
+    @staticmethod
     def detect_from_filename(filename: str) -> Optional[DocumentType]:
         """
         Detect document type from filename using keyword matching.
 
         This is a simple implementation. Phase 4 will use actual content analysis.
         """
-        filename_lower = filename.lower()
-
-        # Score each document type
-        scores = {}
-        for doc_type, keywords in DocumentTypeDetector.PATTERNS.items():
-            score = 0
-            for keyword in keywords:
-                if keyword in filename_lower:
-                    score += len(keyword)  # Longer matches = higher score
-            if score > 0:
-                scores[doc_type] = score
-
-        # Return highest scoring type
+        text_norm = DocumentTypeDetector._normalize_for_match(filename)
+        scores = DocumentTypeDetector._score_keyword_matches(text_norm)
         if scores:
-            return max(scores.items(), key=lambda x: x[1])[0]
+            return max(scores.items(), key=lambda item: item[1])[0]
 
+        return None
+
+    @staticmethod
+    def detect_from_text(text: str) -> Optional[DocumentType]:
+        """
+        Detect document type from extracted text using keyword matching.
+
+        Used as a fallback when filename-based detection fails (e.g., "1.pdf").
+        """
+        text_norm = DocumentTypeDetector._normalize_for_match(text)
+        scores = DocumentTypeDetector._score_keyword_matches(text_norm)
+        if scores:
+            return max(scores.items(), key=lambda item: item[1])[0]
         return None
 
     @staticmethod
@@ -400,6 +437,8 @@ class DocumentIntake:
             "original_path": str(path),
             "mime_type": mimetypes.guess_type(str(path))[0]
         }
+        if detected_type:
+            metadata["detected_type_source"] = "filename"
         if display_name:
             metadata["original_filename"] = display_name
         catalog_entry = DocumentIntake.match_catalog_entry(

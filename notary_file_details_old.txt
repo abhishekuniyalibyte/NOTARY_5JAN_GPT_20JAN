@@ -1,0 +1,53 @@
+Notarial Chatbot Flow - Document Analysis Report
+Generated: 2026-01-22T17:13:17
+Total files: 1
+
+Details: Declaratoria 17.904.pdf
+Type: firma_representacion_representacion (source: content)
+Type detail: selected=firma_representacion_representacion; source=content; detected=n/a; llm=firma_representacion_representacion (0.90, ok); keyword=personeria_representacion_representacion (0.50, ok)
+Detected type (filename): 
+File info: format=pdf, size_bytes=1622377, processing_status=indexed, is_scanned=False
+Validation: unknown - No validation available.
+Error flag: no
+Dataset match:
+correct: LLM classified document type matches summary taxonomy. (confidence 0.9)
+Match details:
+{
+  "status": "correct",
+  "match_type": "llm_only",
+  "confidence": 0.9,
+  "reason": "LLM classified document type matches summary taxonomy.",
+  "matches": [],
+  "llm_result": {
+    "is_certificate": true,
+    "certificate_type": "firma_representacion_representacion",
+    "purpose": "registro",
+    "confidence": 0.9,
+    "reason": "The document contains a notarial certification of a signature and representation of a company, including details about the company's constitution, bylaws, and board of directors, which matches the characteristics of the 'firma_representacion_representacion' category, specifically for registration purposes.",
+    "status": "ok"
+  }
+}
+Review required: yes
+Review reasons:
+[
+  "Conflicto: tipos de certificado difieren entre LLM y keywords."
+]
+LLM classification:
+{
+  "is_certificate": true,
+  "certificate_type": "firma_representacion_representacion",
+  "purpose": "registro",
+  "confidence": 0.9,
+  "reason": "The document contains a notarial certification of a signature and representation of a company, including details about the company's constitution, bylaws, and board of directors, which matches the characteristics of the 'firma_representacion_representacion' category, specifically for registration purposes.",
+  "status": "ok"
+}
+Keyword classification:
+{
+  "status": "ok",
+  "is_certificate": true,
+  "certificate_type": "personeria_representacion_representacion",
+  "purpose": "registro",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, poder"
+}
+--------------------------------------------------------------------------------

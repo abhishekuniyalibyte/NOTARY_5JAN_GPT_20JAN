@@ -18,7 +18,13 @@ from datetime import datetime
 import json
 import re
 
-from src.phase3_document_intake import UploadedDocument, DocumentCollection, FileFormat, DocumentType
+from src.phase3_document_intake import (
+    DocumentCollection,
+    DocumentType,
+    DocumentTypeDetector,
+    FileFormat,
+    UploadedDocument,
+)
 
 
 class TextNormalizer:
@@ -472,6 +478,14 @@ class TextExtractor:
 
             # Step 2: Normalize text
             normalized_text = TextNormalizer.normalize_text(raw_text)
+
+            # Step 2b: If filename-based detection failed, try content-based detection.
+            if not document.detected_type and normalized_text:
+                inferred_type = DocumentTypeDetector.detect_from_text(normalized_text)
+                if inferred_type:
+                    document.detected_type = inferred_type
+                    if isinstance(document.metadata, dict):
+                        document.metadata["detected_type_source"] = "content"
 
             # Step 3: Extract structured data
             extracted_data = ExtractedData(

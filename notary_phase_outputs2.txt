@@ -1,5 +1,5 @@
 Notarial Chatbot Flow - Phase Outputs
-Generated: 2026-01-27T12:56:48
+Generated: 2026-01-27T12:36:03
 
 Phase 1
 
@@ -45,23 +45,21 @@ Phase 3
 
 📊 COBERTURA DE DOCUMENTOS:
    Total requeridos: 4
-   Presentes: 0
-   Faltantes: 4
-   Cobertura: 0.0%
+   Presentes: 2
+   Faltantes: 2
+   Cobertura: 50.0%
 
 📁 DOCUMENTOS CARGADOS (7 total):
-   📄 1.pdf [PDF] (4283.4 KB) - Tipo: no detectado - Digital
-   📄 2.pdf [PDF] (1000.0 KB) - Tipo: no detectado - Digital
-   📄 3.doc [DOC] (35.0 KB) - Tipo: no detectado - Digital
-   📄 4.doc [DOC] (37.0 KB) - Tipo: no detectado - Digital
-   📄 5.pdf [PDF] (1584.4 KB) - Tipo: no detectado - Digital
-   📄 6.pdf [PDF] (7780.6 KB) - Tipo: no detectado - Digital
-   📄 7.pdf [PDF] (138.1 KB) - Tipo: no detectado - Digital
+   📄 BCU AZILI S.A. 2018.06 DDJJ.pdf [PDF] (4283.4 KB) - Tipo: declaracion_jurada - Digital
+   📄 BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf [PDF] (1000.0 KB) - Tipo: declaracion_jurada - Digital
+   📄 Certificacion control leyes 18930 y 19484.doc [DOC] (35.0 KB) - Tipo: cedula_identidad - Digital
+   📄 Certificacion personeria, representación, leyes.doc [DOC] (37.0 KB) - Tipo: cedula_identidad - Digital
+   📄 Declaratoria 17.904.pdf [PDF] (1584.4 KB) - Tipo: no detectado - Digital
+   📄 Estatuto Azili S.A..pdf [PDF] (7780.6 KB) - Tipo: estatuto - Digital
+   📄 factura_9148035_PDF DGI (1).pdf [PDF] (138.1 KB) - Tipo: certificado_dgi - Digital
 
-⚠️  DOCUMENTOS FALTANTES (4):
+⚠️  DOCUMENTOS FALTANTES (2):
    ❌ Inscripción en Registro de Comercio
-   ❌ Estatuto social de la empresa
-   ❌ Certificado de situación tributaria (DGI)
    ❌ Acta de Directorio designando representantes
 
 --------------------------------------------------------------------------------
@@ -79,9 +77,9 @@ Phase 4
 
 📄 RESULTADOS POR DOCUMENTO:
 
-✅ 1.pdf
+✅ BCU AZILI S.A. 2018.06 DDJJ.pdf
 
-📄 DOCUMENTO: DESCONOCIDO
+📄 DOCUMENTO: DECLARACION_JURADA
    Método extracción: TEXT
    Confianza: 70.0%
 
@@ -90,9 +88,9 @@ Phase 4
    RUT: 217307910013
    Fechas encontradas: 17/5/2018, 27/4/2015, 1/8/2012
 
-✅ 2.pdf
+✅ BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf
 
-📄 DOCUMENTO: DESCONOCIDO
+📄 DOCUMENTO: DECLARACION_JURADA
    Método extracción: TEXT
    Confianza: 70.0%
 
@@ -102,25 +100,25 @@ Phase 4
    Acta N°: 140
    Fechas encontradas: 29/05/2018, 14/08/2014, 18/08/2014
 
-✅ 3.doc
+✅ Certificacion control leyes 18930 y 19484.doc
 
-📄 DOCUMENTO: DESCONOCIDO
+📄 DOCUMENTO: CEDULA_IDENTIDAD
    Método extracción: TEXT
    Confianza: 70.0%
 
 📊 DATOS EXTRAÍDOS:
    RUT: 217307910013
 
-✅ 4.doc
+✅ Certificacion personeria, representación, leyes.doc
 
-📄 DOCUMENTO: DESCONOCIDO
+📄 DOCUMENTO: CEDULA_IDENTIDAD
    Método extracción: TEXT
    Confianza: 70.0%
 
 📊 DATOS EXTRAÍDOS:
    RUT: 217307910013
 
-✅ 5.pdf
+✅ Declaratoria 17.904.pdf
 
 📄 DOCUMENTO: DESCONOCIDO
    Método extracción: TEXT
@@ -131,9 +129,9 @@ Phase 4
    RUT: 217307910013
    Fechas encontradas: 05/05/2015
 
-✅ 6.pdf
+✅ Estatuto Azili S.A..pdf
 
-📄 DOCUMENTO: DESCONOCIDO
+📄 DOCUMENTO: ESTATUTO
    Método extracción: TEXT
    Confianza: 70.0%
 
@@ -143,9 +141,9 @@ Phase 4
    CI: 1.695.290-8
    Fechas encontradas: 19/12/2013, 16/01/14, 16/01/14
 
-✅ 7.pdf
+✅ factura_9148035_PDF DGI (1).pdf
 
-📄 DOCUMENTO: DESCONOCIDO
+📄 DOCUMENTO: CERTIFICADO_DGI
    Método extracción: TEXT
    Confianza: 70.0%
 
@@ -164,17 +162,14 @@ Phase 5
    ¿Puede emitir certificado?: ❌ NO
 
 📊 RESUMEN DE PROBLEMAS:
-   🔴 Críticos: 5
-   🟠 Errores: 2
+   🔴 Críticos: 3
+   🟠 Errores: 4
    🟡 Advertencias: 5
    🔵 Info: 0
 
 📄 VALIDACIÓN DE DOCUMENTOS (4 total):
 
-   ❌ ESTATUTO [REQUERIDO] - FALTANTE
-      🔴 estatuto: Falta documento obligatorio: Estatuto social de la empresa
-      Base legal: Art. 248
-      Recomendación: Cargar Estatuto social de la empresa
+   ✅ ESTATUTO [REQUERIDO] - PRESENTE
    ❌ REGISTRO_COMERCIO [REQUERIDO] - FALTANTE
       🔴 registro_comercio: Falta documento obligatorio: Inscripción en Registro de Comercio
       Base legal: Art. 249
@@ -183,10 +178,13 @@ Phase 5
       🔴 acta_directorio: Falta documento obligatorio: Acta de Directorio designando representantes
       Base legal: Art. 248
       Recomendación: Cargar Acta de Directorio designando representantes
-   ❌ CERTIFICADO_DGI [REQUERIDO] - FALTANTE
-      🔴 certificado_dgi: Falta documento obligatorio: Certificado de situación tributaria (DGI)
+   ❌ CERTIFICADO_DGI [REQUERIDO] - PRESENTE
+      🟠 certificado_dgi_expiry: Certificado de situación tributaria (DGI) está vencido (fecha 2020-09-23).
       Base legal: Ley 17904
-      Recomendación: Cargar Certificado de situación tributaria (DGI)
+      Recomendación: Actualizar documento con antigüedad menor a 90 días.
+      🟠 rut: No se encontró RUT en el certificado DGI.
+      Base legal: Ley 17904
+      Recomendación: Verificar que el documento incluya este dato.
 
 🔍 VALIDACIÓN DE ELEMENTOS (8 total):
 
@@ -215,9 +213,9 @@ Phase 5
 
 ⚠️ PROBLEMAS DE CONSISTENCIA ENTRE DOCUMENTOS:
 
-   🟠 company_name_consistency: Nombre de empresa inconsistente entre documentos: Protocolización preceptiva de Declaratoria de Azili Sociedad Anónima, como fundadoras de AZILI S.A., Azili S.A., AZILI SA, EN FE DE ELLO a solicitud de Azili SA
+   🟠 company_name_consistency: Nombre de empresa inconsistente entre documentos: EN FE DE ELLO a solicitud de Azili SA, como fundadoras de AZILI S.A., Protocolización preceptiva de Declaratoria de Azili Sociedad Anónima, Azili S.A., AZILI SA
       Recomendación: Verificar que todos los documentos correspondan a la misma empresa
-   🟠 rut_consistency: RUT inconsistente entre documentos: 180529241648, 217307910013
+   🟠 rut_consistency: RUT inconsistente entre documentos: 217307910013, 180529241648
       Recomendación: Verificar que todos los documentos correspondan al mismo RUT
 
 📚 VERIFICACIÓN DE ARTÍCULOS:
@@ -235,20 +233,14 @@ Phase 5
       Elementos: destination_entity
       Extracto: Art. 248. Certificado notarial es el instrumento público original autorizado por escribano, con el objeto de: a) acreditar la existencia de situaciones jurídica
 
-❌ NO PUEDE EMITIR CERTIFICADO - 5 PROBLEMAS CRÍTICOS:
+❌ NO PUEDE EMITIR CERTIFICADO - 3 PROBLEMAS CRÍTICOS:
 
-   🔴 estatuto: Falta documento obligatorio: Estatuto social de la empresa
-      Base legal: Art. 248
-      Recomendación: Cargar Estatuto social de la empresa
    🔴 registro_comercio: Falta documento obligatorio: Inscripción en Registro de Comercio
       Base legal: Art. 249
       Recomendación: Cargar Inscripción en Registro de Comercio
    🔴 acta_directorio: Falta documento obligatorio: Acta de Directorio designando representantes
       Base legal: Art. 248
       Recomendación: Cargar Acta de Directorio designando representantes
-   🔴 certificado_dgi: Falta documento obligatorio: Certificado de situación tributaria (DGI)
-      Base legal: Ley 17904
-      Recomendación: Cargar Certificado de situación tributaria (DGI)
    🔴 registro_comercio: No se encontró inscripción en Registro de Comercio
       Base legal: Art. 249
       Recomendación: Cargar certificado de Registro de Comercio
@@ -262,24 +254,16 @@ Phase 6
 ❌ ESTADO: REQUIERE CORRECCIONES
 
 📊 RESUMEN DE PROBLEMAS:
-   Total de brechas: 8
-   🔴 Urgentes (bloquean emisión): 6
-   🟠 Prioridad alta: 2
+   Total de brechas: 7
+   🔴 Urgentes (bloquean emisión): 4
+   🟠 Prioridad alta: 3
    🟡 Prioridad media: 0
    🟢 Prioridad baja: 0
 
-   ⚠️  Problemas bloqueantes: 8
+   ⚠️  Problemas bloqueantes: 7
 
-🔴 PROBLEMAS URGENTES (6):
+🔴 PROBLEMAS URGENTES (4):
    DEBE CORREGIR ESTOS ANTES DE EMITIR CERTIFICADO
-
-🔴 Falta Estatuto social de la empresa [URGENT]
-   Documento obligatorio no encontrado: Estatuto social de la empresa
-   📄 Documento afectado: Estatuto
-   ⚖️  Base legal: Art. 248
-   📊 Estado actual: Documento no cargado
-   ✅ Estado requerido: Documento presente y válido
-   🔧 Acción requerida: Cargar Estatuto social de la empresa al sistema
 
 🔴 Falta Inscripción en Registro de Comercio [URGENT]
    Documento obligatorio no encontrado: Inscripción en Registro de Comercio
@@ -297,14 +281,6 @@ Phase 6
    ✅ Estado requerido: Documento presente y válido
    🔧 Acción requerida: Cargar Acta de Directorio designando representantes al sistema
 
-🔴 Falta Certificado de situación tributaria (DGI) [URGENT]
-   Documento obligatorio no encontrado: Certificado de situación tributaria (DGI)
-   📄 Documento afectado: Certificado Dgi
-   ⚖️  Base legal: Ley 17904
-   📊 Estado actual: Documento no cargado
-   ✅ Estado requerido: Documento presente y válido
-   🔧 Acción requerida: Cargar Certificado de situación tributaria (DGI) al sistema
-
 🔴 Falta información: Registry Inscription [URGENT]
    No se encontró inscripción en Registro de Comercio
    ⚖️  Base legal: Art. 249
@@ -312,22 +288,31 @@ Phase 6
    ✅ Estado requerido: Registry Inscription debe estar presente en documentos
    🔧 Acción requerida: Verificar que documentos contengan Registry Inscription o cargar documento adicional
 
-🔴 Revisar documento: 7.pdf [URGENT]
+🔴 Revisar documento: factura_9148035_PDF DGI (1).pdf [URGENT]
    No se pudo clasificar por contenido.; No strong match found in certificate_summary.json. Requiere verificación manual.
    📊 Estado actual: No verificado
    ✅ Estado requerido: Verificado por notario o fuente oficial
    🔧 Acción requerida: Verificar manualmente el documento
 
-🟠 PRIORIDAD ALTA (2):
+🟠 PRIORIDAD ALTA (3):
+
+🟠 Documento vencido: Certificado Dgi [HIGH]
+   Certificado de situación tributaria (DGI) está vencido (fecha 2020-09-23).
+   📄 Documento afectado: Certificado Dgi
+   ⚖️  Base legal: Ley 17904
+   📊 Estado actual: Documento vencido o con más días de antigüedad de los permitidos
+   ✅ Estado requerido: Documento con menos de 90 días de antigüedad
+   🔧 Acción requerida: Obtener versión actualizada del documento
+   ⏰ Plazo: 03/02/2026
 
 🟠 Inconsistencia: Company Name Consistency [HIGH]
-   Nombre de empresa inconsistente entre documentos: Protocolización preceptiva de Declaratoria de Azili Sociedad Anónima, como fundadoras de AZILI S.A., Azili S.A., AZILI SA, EN FE DE ELLO a solicitud de Azili SA
+   Nombre de empresa inconsistente entre documentos: EN FE DE ELLO a solicitud de Azili SA, como fundadoras de AZILI S.A., Protocolización preceptiva de Declaratoria de Azili Sociedad Anónima, Azili S.A., AZILI SA
    📊 Estado actual: Datos inconsistentes entre documentos
    ✅ Estado requerido: Datos consistentes en todos los documentos
    🔧 Acción requerida: Verificar que todos los documentos correspondan a la misma empresa
 
 🟠 Inconsistencia: Rut Consistency [HIGH]
-   RUT inconsistente entre documentos: 180529241648, 217307910013
+   RUT inconsistente entre documentos: 217307910013, 180529241648
    📊 Estado actual: Datos inconsistentes entre documentos
    ✅ Estado requerido: Datos consistentes en todos los documentos
    🔧 Acción requerida: Verificar que todos los documentos correspondan al mismo RUT
@@ -335,18 +320,16 @@ Phase 6
 
 📄 REPORTE POR DOCUMENTO (4):
 
-   ❌ Estatuto - FALTANTE (1 problemas)
-      ⚠️  Documento obligatorio faltante
-      💡 Cargar estatuto
+   ✅ Estatuto - PRESENTE
    ❌ Registro Comercio - FALTANTE (1 problemas)
       ⚠️  Documento obligatorio faltante
       💡 Cargar registro comercio
    ❌ Acta Directorio - FALTANTE (1 problemas)
       ⚠️  Documento obligatorio faltante
       💡 Cargar acta directorio
-   ❌ Certificado Dgi - FALTANTE (1 problemas)
-      ⚠️  Documento obligatorio faltante
-      💡 Cargar certificado dgi
+   ❌ Certificado Dgi - PRESENTE (1 problemas)
+      ⚠️  Documento presente pero con problemas de validación
+      💡 Revisar y corregir problemas listados
       💡 Verificar que documento tenga menos de 90 días
 
 ❌ PRÓXIMOS PASOS:
@@ -362,7 +345,7 @@ Phase 7
 ======================================================================
 
 📊 RESUMEN DE ACTUALIZACIONES:
-   Total de brechas detectadas: 8
+   Total de brechas detectadas: 7
    Brechas atendidas: 0
    Actualizaciones exitosas: 0 ✅
    Actualizaciones fallidas: 0 ❌
@@ -372,14 +355,14 @@ Phase 7
    Documentos antes: 4
    Documentos después: 7
 
-⏰ Timestamp: 2026-01-27 12:45:33
+⏰ Timestamp: 2026-01-27 12:35:20
 
 
 ℹ️  Fuentes oficiales no configuradas; se requiere verificación manual o carga de documentos.
 
 🔍 DOCUMENTOS PARA REVISIÓN MANUAL:
 ----------------------------------------------------------------------
-   • 7.pdf
+   • factura_9148035_PDF DGI (1).pdf
      - No se pudo clasificar por contenido.
      - No strong match found in certificate_summary.json. Requiere verificación manual.
 
@@ -397,17 +380,17 @@ Phase 8
 
 📊 RESUMEN DE VERIFICACIONES:
    Total de verificaciones: 8
-   Verificaciones exitosas: 1 ✅
-   Verificaciones fallidas: 7 ❌
+   Verificaciones exitosas: 0 ✅
+   Verificaciones fallidas: 8 ❌
 
-   Problemas bloqueantes: 6 🚫
-   Problemas críticos: 5 🔴
+   Problemas bloqueantes: 7 🚫
+   Problemas críticos: 6 🔴
    Advertencias: 1 🟡
 
 📋 RATIONALE:
-Certificado rechazado: 6 problema(s) bloqueante(s), 5 problema(s) crítico(s). Debe resolver estos problemas antes de generar certificado.
+Certificado rechazado: 7 problema(s) bloqueante(s), 6 problema(s) crítico(s). Debe resolver estos problemas antes de generar certificado.
 
-⏰ Timestamp: 2026-01-27 12:45:33
+⏰ Timestamp: 2026-01-27 12:35:20
 👤 Validado por: Sistema Automatizado
 
 
@@ -416,11 +399,12 @@ Certificado rechazado: 6 problema(s) bloqueante(s), 5 problema(s) crítico(s). D
 ======================================================================
 
 Problemas que deben ser resueltos:
-  • Documentos requeridos presentes: 4 documento(s) faltante(s)
+  • Documentos requeridos presentes: 2 documento(s) faltante(s)
+  • Documentos vigentes: 1 documento(s) vencido(s)
   • Elementos requeridos presentes: 6 elemento(s) faltante(s)
   • Consistencia de datos: 2 inconsistencia(s) detectada(s)
-  • Sin problemas críticos: 5 problema(s) crítico(s)
-  • Brechas urgentes resueltas: 5 brecha(s) urgente(s) sin resolver
+  • Sin problemas críticos: 3 problema(s) crítico(s)
+  • Brechas urgentes resueltas: 3 brecha(s) urgente(s) sin resolver
   • Cumplimiento de Artículos 248-255: Artículos no cumplidos
 
 No puede proceder a Fase 9 hasta resolver estos problemas.

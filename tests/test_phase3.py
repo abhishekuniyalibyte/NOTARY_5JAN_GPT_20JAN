@@ -127,6 +127,25 @@ class TestDocumentTypeDetector(unittest.TestCase):
         detected = DocumentTypeDetector.detect_from_filename("random_file.pdf")
         self.assertIsNone(detected)
 
+    def test_detect_filename_avoids_substring_false_positives(self):
+        """Short keywords like 'ci' should not match inside longer words (e.g. 'certificacion')."""
+        detected = DocumentTypeDetector.detect_from_filename("certificacion_control_leyes.doc")
+        self.assertIsNone(detected)
+
+    def test_detect_from_text(self):
+        """Test detecting document types from extracted content text."""
+        detected = DocumentTypeDetector.detect_from_text("Este es el Estatuto Social de la empresa GIRTEC S.A.")
+        self.assertEqual(detected, DocumentType.ESTATUTO)
+
+        detected = DocumentTypeDetector.detect_from_text("Se presenta la Declaración Jurada (DDJJ) ante BCU.")
+        self.assertEqual(detected, DocumentType.DECLARACION_JURADA)
+
+        detected = DocumentTypeDetector.detect_from_text("Cédula de Identidad del compareciente.")
+        self.assertEqual(detected, DocumentType.CEDULA_IDENTIDAD)
+
+        detected = DocumentTypeDetector.detect_from_text("Texto sin indicadores claros.")
+        self.assertIsNone(detected)
+
     def test_is_likely_scanned(self):
         """Test scanned detection"""
         self.assertTrue(DocumentTypeDetector.is_likely_scanned(FileFormat.JPG))
