@@ -1,0 +1,52 @@
+Notarial Chatbot Flow - Document Analysis Report
+Generated: 2026-01-27T17:54:35
+Total files: 1
+
+Details: BCU AZILI S.A. 2018.06 DDJJ.pdf
+Type: personeria_representacion_representacion (source: content)
+Type detail: selected=personeria_representacion_representacion; source=content; detected=declaracion_jurada; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
+Detected type (auto): declaracion_jurada
+File info: format=pdf, size_bytes=4386180, processing_status=indexed, is_scanned=False
+Validation: not_required - Document type is not required for the selected certificate.
+Error flag: yes
+Error reasons:
+[
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+]
+Dataset match:
+correct: Matched attributes: domicilio, ley, poder (confidence 0.5)
+Match details:
+{
+  "status": "correct",
+  "match_type": "content_keywords",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, poder",
+  "matches": [],
+  "llm_result": {
+    "status": "error",
+    "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  },
+  "keyword_result": {
+    "status": "ok",
+    "is_certificate": true,
+    "certificate_type": "personeria_representacion_representacion",
+    "purpose": "bse",
+    "confidence": 0.5,
+    "reason": "Matched attributes: domicilio, ley, poder"
+  }
+}
+LLM classification:
+{
+  "status": "error",
+  "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+}
+Keyword classification:
+{
+  "status": "ok",
+  "is_certificate": true,
+  "certificate_type": "personeria_representacion_representacion",
+  "purpose": "bse",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, poder"
+}
+--------------------------------------------------------------------------------
