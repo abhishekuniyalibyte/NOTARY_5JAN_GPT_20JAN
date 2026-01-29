@@ -1,0 +1,54 @@
+Notarial Chatbot Flow - Detailed Analysis Report
+Generated: 2026-01-28T14:18:42
+============================================================
+SUMMARY OF ANALYSIS
+--------------------
+Subject: AZILI SOCIEDAD ANONIMA
+Total Files Processed: 9
+Documents Found: firma, firma_representacion_representacion, non_certificate, personeria, personeria_representacion_representacion, unknown, zona_franca
+Status: ATTENTION REQUIRED
+
+Errors Found: Yes (2 files affected)
+Missing Required Documents: Certificado de situación de BPS, Padrón de funcionarios BPS
+============================================================
+
+Details: ERROR Certificacion control leyes 18930 y 19484.pages
+Type: unknown (source: content_missing)
+Validation: unknown - No validation available.
+Errors:   - processing_status=error
+  - text_extraction_error: Unsupported file format: unknown
+--------------------------------------------------------------------------------
+Details: Estatuto Azili S.A..pdf
+Type: zona_franca (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: Certificacion personeria, representación, leyes.doc
+Type: personeria_representacion_representacion (source: content)
+Validation: valid - Document passes validation checks.
+--------------------------------------------------------------------------------
+Details: ERROR Certificacion personeria, representación, leyes.pages
+Type: unknown (source: content_missing)
+Validation: unknown - No validation available.
+Errors:   - processing_status=error
+  - text_extraction_error: Unsupported file format: unknown
+--------------------------------------------------------------------------------
+Details: Certificacion control leyes 18930 y 19484.doc
+Type: personeria (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: factura_9148035_PDF DGI (1).pdf
+Type: non_certificate (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf
+Type: firma (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: Declaratoria 17.904.pdf
+Type: personeria_representacion_representacion (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: BCU AZILI S.A. 2018.06 DDJJ.pdf
+Type: firma_representacion_representacion (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------

@@ -1,0 +1,50 @@
+Notarial Chatbot Flow - Detailed Analysis Report
+Generated: 2026-01-29T11:59:46
+============================================================
+SUMMARY OF ANALYSIS
+--------------------
+Subject: AZILI SOCIEDAD ANONIMA
+Total Files Processed: 7
+Documents Found: firma, firma_representacion_representacion, non_certificate, personeria, personeria_representacion_representacion
+Status: ATTENTION REQUIRED
+
+Errors Found: Yes (1 files affected)
+Missing Required Documents: Certificado de situación de BPS, Padrón de funcionarios BPS
+============================================================
+
+Details: Estatuto Azili S.A..pdf
+Type: firma_representacion_representacion (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: Certificacion personeria, representación, leyes.doc
+Type: personeria_representacion_representacion (source: content)
+Validation: invalid - No se encontró CI en la cédula de identidad.
+Errors:   - validation_status=invalid
+Issues:   - Item:
+    Field: ci
+    Issue Type: missing_field
+    Severity: error
+    Description: No se encontró CI en la cédula de identidad.
+    Legal Basis: Art. 130
+    Recommendation: Verificar que el documento incluya este dato.
+--------------------------------------------------------------------------------
+Details: Certificacion control leyes 18930 y 19484.doc
+Type: personeria (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: factura_9148035_PDF DGI (1).pdf
+Type: non_certificate (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf
+Type: firma (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: Declaratoria 17.904.pdf
+Type: firma_representacion_representacion (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------
+Details: BCU AZILI S.A. 2018.06 DDJJ.pdf
+Type: non_certificate (source: content)
+Validation: not_required - Document type is not required for the selected certificate.
+--------------------------------------------------------------------------------

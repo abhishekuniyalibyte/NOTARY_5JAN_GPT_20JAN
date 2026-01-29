@@ -1,0 +1,187 @@
+NOTARIA PROJECT README
+
+What this project does
+
+This project helps a notary upload a set of documents, extract the important information from them, validate the set against predefined legal and institutional requirements, and only generate a certificate draft when the requirements are satisfied. The goal is to make it clear what is missing, what is inconsistent, what is expired, and what needs manual verification before proceeding.
+
+Inputs (what the notary provides)
+
+The process starts in the Streamlit app.
+
+- The notary selects the certificate type and the purpose or destination (for example BPS). These two inputs decide what the system will require and validate.
+- The notary can provide the subject name (company/person). If it is not provided, the system may infer it from extracted text, but that can create inconsistencies if the uploaded documents contain multiple name variations.
+- The notary uploads multiple files, or provides a local folder path. If a folder is selected, every file inside the folder is treated as part of the same request, so mixing different companies in one folder will cause consistency warnings and may block generation.
+- Optionally, the notary can select a catalog built from an Excel file (for example ACRISOUND.xlsx). This catalog does not define the legal requirements; it is used for matching hints, expected formats, and better reporting.
+- Optionally, the notary can enable OCR fallback and LLM extraction/classification (Groq). OCR helps with scanned documents. The LLM helps extract structured fields and classify documents by content, but low-confidence results still require manual review.
+
+Workflow (how the system processes the request end to end)
+
+Input → Processing → Output (end-to-end logic)
+
+1. Inputs collected in the Streamlit form (certificate type, purpose, subject, files or folder path).
+2. Files are normalized into a list of {path, filename} items:
+   - If files are uploaded, each is saved to a temporary directory and given a stable local path.
+   - If a folder path is provided, every file in the folder is added as an input.
+3. run_flow(...) executes the full 11-phase pipeline and produces:
+   - Per-file analysis (file_results)
+   - Phase summaries (phase1…phase11)
+   - Optional reports saved to disk (notary_summary.txt, notary_detailed_report.txt, notary_file_report.csv, notary_phase_outputs.txt)
+
+------------------------------
+Pipeline phases (what happens in each phase)
+------------------------------
+
+This is what notary_phase_outputs.txt prints in order:
+
+1. Phase 1 — Intent
+   - Captures the notary’s request: certificate type + purpose/destination + subject (company/person).
+   - Sets the “target context” that all later validation is based on.
+2. Phase 2 — Requirements (legal + institutional)
+   - Loads the applicable legal articles and any institutional rules (for example BPS expiry windows).
+   - Builds the required-documents checklist (mandatory/optional, expiry rules, and legal-basis labels).
+3. Phase 3 — Document collection & coverage
+   - Indexes uploaded/scanned files and assigns basic metadata (format, size, scanned/digital flags when available).
+   - Compares what is required vs what is present and reports missing required documents early.
+4. Phase 4 — Extraction
+   - Extracts text (and runs OCR fallback if enabled) and then extracts key fields (company name, RUT, CI, dates, etc.).
+   - If a document is scanned/low-quality, extraction can miss required fields. When that happens, the pipeline effectively gets stuck because later validation cannot confirm mandatory data.
+   - Produces extraction confidence/warnings that affect later “needs manual review” flags.
+5. Phase 5 — Validation matrix
+   - Validates required document presence (blocking if mandatory docs are missing).
+   - Validates required elements/fields per requirement and evaluates article compliance where mapped (this depends on Phase 4 extracting those fields).
+   - Runs cross-document consistency checks (for example company name and RUT consistency).
+6. Phase 6 — Gap analysis
+   - Converts validation results into a prioritized “to-fix” list (URGENT/HIGH/etc.) with recommended actions.
+   - Includes deadlines where the rule set provides expiry windows (for example “valid within 30 days”).
+7. Phase 7 — Update step (official sources vs manual)
+   - Attempts to close gaps by fetching/updating from official sources when configured.
+   - If official sources are not configured, it reports manual-only status and lists what needs upload/verification.
+8. Phase 8 — Final legal decision (go/no-go gate)
+   - Approves or rejects certificate generation based on blocking/critical issues remaining (including missing required fields caused by extraction failure).
+   - If rejected, subsequent generation phases are skipped.
+9. Phase 9 — Draft generation
+   - Generates the certificate draft only if Phase 8 approved the request.
+10. Phase 10 — Review/approval
+   - Runs the final review step only if a draft was generated in Phase 9.
+11. Phase 11 — Final output
+   - Produces the final deliverable only if Phase 10 was approved.
+
+------------------------------
+End of pipeline phases
+------------------------------
+
+
+File handling and preparation
+
+If the notary uploads files, the app saves each file into a temporary local directory so the rest of the code can work with stable file paths. The original filename is still kept for reporting and for any filename-based matching. If the notary provides a local folder path, the app scans the directory and collects all files inside it.
+
+Document intake and basic metadata
+
+Each file is converted into an internal document object with metadata like file format, size, and processing status. The system tries to detect a probable document type from filename keywords (estatuto, acta, bps, dgi, poder, etc.). If detection is not possible from the filename, later content-based detection can still help when text is available.
+
+Text extraction and OCR
+
+The system extracts text from each document. For PDFs/DOCX/TXT it tries direct extraction. For legacy DOC it may use LibreOffice conversion or other fallback methods. If Groq is enabled, the LLM is used to help extract structured fields from the text; if text extraction fails and OCR fallback is enabled, the system attempts OCR for scanned PDFs and images. After extraction, the system normalizes the text so later matching and field extraction are more stable (for example, it reduces differences caused by accents, casing, and punctuation). In practice, end-to-end processing can take ~10 minutes for 9 files when OCR/LLM are enabled.
+
+Structured data extraction
+
+From the extracted text, the system extracts key fields such as company name, RUT, CI, registry references, and dates. Regex extraction is always available as a fallback. If Groq is enabled and an API key is present, the system also asks the LLM to extract fields and return them in a structured format; regex is still used to fill gaps or validate basic patterns.
+
+Understanding what each document is
+
+The system tries to label each uploaded document based on its content. It uses a keyword classifier and can also use an LLM classifier if enabled. The classifier is constrained by the taxonomy built from cetificate from dataset/certificate_summary.json so it stays within known categories instead of inventing new ones. This content-based classification is especially useful when the files are named generically.
+
+How certificate_summary.json is used (exact logic)
+
+The summary file is loaded once at startup and transformed into a compact reference (summary_reference) with:
+- known certificate types
+- known purposes per type
+- known attributes
+- example phrases
+
+During processing, each document text is compared against this reference in two ways:
+1. Keyword classifier: matches attributes and purposes in the normalized text, returning a best-fit type + confidence.
+2. LLM classifier (optional): asks Groq to pick a type/purpose from the same summary reference, returning structured JSON.
+
+The result is used to:
+- Label the document as a certificate or non-certificate.
+- Provide a candidate type/purpose to override the initial intent when confidence is strong.
+- Improve dataset-style matching and review flags in file_results.
+
+Building the requirement checklist (the source of what is needed)
+
+Before validation, the system builds a checklist for the selected certificate type and purpose. This checklist is defined in code in src/phase2_legal_requirements.py. It includes which document types are mandatory, which are optional, which have expiry windows (for example 30 days for some institutional requirements), and the legal basis label used for reporting (article/law reference).
+
+Validation (how compliance is decided)
+
+The system validates the uploaded set using rule-based checks against the checklist.
+
+- It checks required document presence: any mandatory document type that is not present is reported as missing and is treated as a blocking issue.
+- It checks required fields: for each required document type, it verifies that the expected fields are found in the extracted data (for example, a CI should be found in an identity document, and a RUT should be found where required). Missing required fields are reported as issues and can block generation depending on severity.
+- It checks expiry and freshness: when a requirement has an expiry window, the system extracts dates from the document and compares them to the allowed timeframe. Expired documents are blocking. If a date cannot be reliably confirmed, the system can request manual verification of validity.
+- It checks data consistency across documents: company name and RUT should not conflict across the set. If multiple values are found, the system reports inconsistencies and asks for confirmation or correction.
+- It checks extraction quality: unsupported formats, empty text, very low confidence, and OCR-only reads are flagged because they reduce reliability and may require manual review.
+
+Legal article references and the local articles folder
+
+When the system reports issues, it includes the legal basis label from the rule mappings. It can also attach a short excerpt from local article texts stored in the articles/ folder so the notary can see context. The enforcement is not done by parsing the article text; enforcement is driven by the explicit rule checks and mappings in code.
+
+Gaps, manual review, and final decision
+
+All issues are converted into a clear list of gaps and action items (missing documents, inconsistencies, review-needed items). If external official sources are not configured, the system cannot fetch missing documents automatically, so missing items must be uploaded manually or verified by the notary. A final go/no-go gate blocks certificate generation if blocking issues remain. If everything passes, the system generates a certificate draft, runs a review step, and produces the final outputs.
+
+Outputs (what the notary gets at the end)
+
+- notary_summary.txt: short overview of the run (subject, file count, document labels, whether attention is required, and which required documents are missing).
+- notary_detailed_report.txt: detailed explanation per file (classification label, validation status, issues found, and legal basis labels).
+- notary_file_report.csv: spreadsheet report of each uploaded file (classification signals, validation signals, and optional catalog metadata when available).
+- notary_phase_outputs.txt: combined run log showing the full workflow output across the main processing steps.
+
+Where the required documents rules come from
+
+The mapping is defined in src/phase2_legal_requirements.py. This file contains the rules engine that takes certificate type and purpose and returns a structured list of document requirements. Each requirement indicates whether it is mandatory, whether it expires, how many days are allowed, and the legal basis label used in reporting.
+
+What the dataset JSON files are used for
+
+cetificate from dataset/certificate_summary.json
+
+Used as a taxonomy/reference for classification and dataset-style matching. It helps label documents by type/purpose and provides known categories, attributes, and examples. It does not decide what is legally required for a specific request.
+
+cetificate from dataset/customers_index.json
+
+Index of historical files grouped by customer. This is mainly a preprocessing artifact used to build certificate_summary.json and other derived summaries. The runtime workflow does not use customers_index.json directly.
+
+Catalog JSON file
+
+Catalog created from an Excel file (for example ACRISOUND.xlsx). At runtime it is used to match uploaded filenames to expected documents so the system can attach descriptions and expected formats, and warn when the uploaded file does not match what the catalog expects. Each catalog includes a source_file, an entry_count, and an entries list with fields like raw_name, description, expected_extensions, candidate_filenames, plus matching details such as matched_filename, match_status, match_method, and match_score.
+
+What is working well right now
+
+- Document upload and folder scanning.
+- Text extraction for common formats and OCR fallback (when enabled).
+- Field extraction using regex and optional Groq extraction.
+- Content-based classification (keyword and optional Groq classification).
+- Rule-based validation for missing documents, missing required fields, expiry checks, and cross-document consistency.
+- Clear reporting to short summary, detailed report, and CSV.
+- Hard stop that prevents certificate generation when required items are missing.
+
+What is not working
+
+- Extraction is implemented but can miss or inconsistently extract fields from scanned/low-quality documents (for example CI/RUT/company names/dates). When this happens, the whole pipeline can get stuck because the required fields cannot be reliably captured, so it currently cannot generate the final document/certificate until the file is replaced with a clearer version or manually reviewed.
+- Some validation checks are implemented but can produce conservative warnings that require manual review (for example destination entity, document source, and signature presence).
+- Web search fallback is present but currently does not fetch real results.
+
+What needs to be done next
+
+- Implement official-source integrations for the update step (BPS/DGI/registry sources) or formalize a manual update workflow in the UI where the notary can upload missing documents directly against each missing requirement.
+- Add a manual review UI to resolve classification conflicts (LLM vs keywords) and to let the notary map an uploaded file to a required document type when the filename/content heuristics are wrong.
+- Improve normalization and consistency logic for names and RUT to reduce false inconsistencies.
+- Extend catalog matching to support content-based matching, or enforce a naming convention at upload time so catalog and dataset matching are reliable.
+
+How to run the project (basic)
+
+1. Create and activate a virtual environment and install dependencies from requirements.txt.
+2. Add GROQ_API_KEY to .env if you want LLM extraction/classification.
+3. Run the Streamlit app (for example streamlit run chatbot.py).
+
+If you want legacy DOC extraction and OCR, install the required system tools (LibreOffice, OCR tools) and ensure they are available on PATH.

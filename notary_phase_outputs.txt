@@ -1,0 +1,446 @@
+Notarial Chatbot Flow - Phase Outputs
+Generated: 2026-01-29T10:48:01
+
+Phase 1
+
+╔══════════════════════════════════════════════════════════════╗
+║              DEFINICIÓN DE INTENCIÓN DE CERTIFICADO          ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 Tipo de Certificado: Certificacion De Firmas
+🎯 Propósito/Destino:   Para Bps
+👤 Sujeto:              AZILI SOCIEDAD ANONIMA
+📂 Tipo de Sujeto:      Company
+
+--------------------------------------------------------------------------------
+Phase 2
+
+╔══════════════════════════════════════════════════════════════╗
+║              REQUISITOS LEGALES - FASE 2                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 Tipo de Certificado: Certificacion De Firmas
+🎯 Propósito: Para Bps
+
+📚 ARTÍCULOS APLICABLES:
+   Obligatorios: 248, 249, 255, 250, 251
+   Referencias cruzadas: 130
+
+📄 DOCUMENTOS REQUERIDOS (4 total):
+   ✓ OBLIGATORIO: Cédula de identidad del firmante
+   ○ OPCIONAL: Poder si actúa en representación
+   ✓ OBLIGATORIO: Certificado de situación de BPS [Vence en 30 días] (BPS)
+   ✓ OBLIGATORIO: Padrón de funcionarios BPS [Vence en 30 días] (BPS)
+
+🏛️ REGLAS INSTITUCIONALES (BPS):
+   - Validez del certificado: 30 días
+   - Debe incluir situación de aportes al día
+   - Debe mencionar número de patrón BPS
+
+--------------------------------------------------------------------------------
+Phase 3
+
+╔══════════════════════════════════════════════════════════════╗
+║              COLECCIÓN DE DOCUMENTOS - FASE 3                ║
+╚══════════════════════════════════════════════════════════════╝
+
+👤 Sujeto: AZILI SOCIEDAD ANONIMA
+📋 Tipo: Certificacion De Firmas
+🎯 Propósito: Para Bps
+
+📊 COBERTURA DE DOCUMENTOS:
+   Total requeridos: 3
+   Presentes: 1
+   Faltantes: 2
+   Cobertura: 33.3%
+
+📁 DOCUMENTOS CARGADOS (7 total):
+   📄 Estatuto Azili S.A..pdf [PDF] (7780.6 KB) - Tipo: estatuto - Digital
+   📄 Certificacion personeria, representación, leyes.doc [DOC] (37.0 KB) - Tipo: cedula_identidad - Digital
+   📄 Certificacion control leyes 18930 y 19484.doc [DOC] (35.0 KB) - Tipo: declaracion_jurada - Digital
+   📄 factura_9148035_PDF DGI (1).pdf [PDF] (138.1 KB) - Tipo: certificado_dgi - Digital
+   📄 BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf [PDF] (1000.0 KB) - Tipo: declaracion_jurada - Digital
+   📄 Declaratoria 17.904.pdf [PDF] (1584.4 KB) - Tipo: acta_directorio - Digital
+   📄 BCU AZILI S.A. 2018.06 DDJJ.pdf [PDF] (4283.4 KB) - Tipo: declaracion_jurada - Digital
+
+⚠️  DOCUMENTOS FALTANTES (2):
+   ❌ Certificado de situación de BPS
+   ❌ Padrón de funcionarios BPS
+
+--------------------------------------------------------------------------------
+Phase 4
+
+╔══════════════════════════════════════════════════════════════╗
+║              EXTRACCIÓN DE DATOS - FASE 4                    ║
+╚══════════════════════════════════════════════════════════════╝
+
+📊 RESUMEN:
+   Total documentos: 7
+   Exitosos: 7
+   Fallidos: 0
+   Tasa de éxito: 100.0%
+
+📄 RESULTADOS POR DOCUMENTO:
+
+✅ Estatuto Azili S.A..pdf
+
+📄 DOCUMENTO: ESTATUTO
+   Método extracción: TEXT
+   Confianza: 70.0%
+
+📊 DATOS EXTRAÍDOS:
+   Empresa: AZILI SOCIEDAD ANONIMA
+   RUT: 217307910013
+   CI: ['1.695.290-8', '4.303.456-1', '1.351.774-5']
+   Fechas encontradas: 19/12/2013, 16/01/14, 16/01/14
+
+✅ Certificacion personeria, representación, leyes.doc
+
+📄 DOCUMENTO: CEDULA_IDENTIDAD
+   Método extracción: TEXT
+   Confianza: 70.0%
+
+📊 DATOS EXTRAÍDOS:
+   Empresa: AZILI S.A.
+   RUT: 21730791.0013
+   Registro Comercio: 23966
+   Fechas encontradas: 24 de octubre de 2013, 12 de noviembre de 2013, 19 de diciembre de 2013
+
+✅ Certificacion control leyes 18930 y 19484.doc
+
+📄 DOCUMENTO: DECLARACION_JURADA
+   Método extracción: TEXT
+   Confianza: 70.0%
+
+📊 DATOS EXTRAÍDOS:
+   Empresa: AZILI S.A.
+   RUT: 21.730791.0013
+   Acta N°: 2389497
+   Fechas encontradas: 29 de junio de 2018, 18 de enero de 2022
+
+✅ factura_9148035_PDF DGI (1).pdf
+
+📄 DOCUMENTO: CERTIFICADO_DGI
+   Método extracción: TEXT
+   Confianza: 70.0%
+
+📊 DATOS EXTRAÍDOS:
+   Empresa: AZILI SA
+   RUT: 217307910013
+   Fechas encontradas: 23/7/2019, 12/8/2019, 11-09-2019
+
+✅ BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf
+
+📄 DOCUMENTO: DECLARACION_JURADA
+   Método extracción: TEXT
+   Confianza: 70.0%
+
+📊 DATOS EXTRAÍDOS:
+   Empresa: AZILI S.A.
+   RUT: 180529241648
+   CI: 24.411.548
+   Acta N°: 140
+   Fechas encontradas: 24 de mayo de 2018, 29 de mayo de 2018
+
+✅ Declaratoria 17.904.pdf
+
+📄 DOCUMENTO: ACTA_DIRECTORIO
+   Método extracción: TEXT
+   Confianza: 70.0%
+
+📊 DATOS EXTRAÍDOS:
+   Empresa: AZILI SOCIEDAD ANONIMA
+   RUT: 217307910013
+   Registro Comercio: 23966
+   Fechas encontradas: 30 de abril de 2015, 24 de octubre de 2013, 12 de noviembre de 2013
+
+✅ BCU AZILI S.A. 2018.06 DDJJ.pdf
+
+📄 DOCUMENTO: DECLARACION_JURADA
+   Método extracción: TEXT
+   Confianza: 70.0%
+
+📊 DATOS EXTRAÍDOS:
+   Empresa: AZILI S.A.
+   RUT: 217307910013
+   Fechas encontradas: 17/5/2018
+
+--------------------------------------------------------------------------------
+Phase 5
+
+╔══════════════════════════════════════════════════════════════╗
+║              MATRIZ DE VALIDACIÓN - FASE 5                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+❌ ESTADO GENERAL: INVALID
+   ¿Puede emitir certificado?: ❌ NO
+
+📊 RESUMEN DE PROBLEMAS:
+   🔴 Críticos: 2
+   🟠 Errores: 3
+   🟡 Advertencias: 6
+   🔵 Info: 0
+
+📄 VALIDACIÓN DE DOCUMENTOS (4 total):
+
+   ❌ CEDULA_IDENTIDAD [REQUERIDO] - PRESENTE
+      🟠 ci: No se encontró CI en la cédula de identidad.
+      Base legal: Art. 130
+      Recomendación: Verificar que el documento incluya este dato.
+   ❌ PODER [OPCIONAL] - FALTANTE
+   ❌ CERTIFICADO_BPS [REQUERIDO] - FALTANTE
+      🔴 certificado_bps: Falta documento obligatorio: Certificado de situación de BPS
+      Recomendación: Cargar Certificado de situación de BPS
+   ❌ PADRON_BPS [REQUERIDO] - FALTANTE
+      🔴 padron_bps: Falta documento obligatorio: Padrón de funcionarios BPS
+      Recomendación: Cargar Padrón de funcionarios BPS
+
+🔍 VALIDACIÓN DE ELEMENTOS (6 total):
+
+   ❌ Identity Verification: WARNING
+      🟡 identity_verification: Verificar manualmente: identity verification
+      Recomendación: Revisar documentos manualmente
+   ❌ Document Source: WARNING
+      🟡 document_source: Verificar manualmente: document source
+      Recomendación: Revisar documentos manualmente
+   ❌ Destination Entity: WARNING
+      🟡 destination_entity: Verificar manualmente: destination entity
+      Recomendación: Revisar documentos manualmente
+   ❌ Validity Dates: WARNING
+      🟡 validity_dates: Verificar manualmente: validity dates
+      Recomendación: Revisar documentos manualmente
+   ❌ Signature Presence: WARNING
+      🟡 signature_presence: Verificar manualmente: signature presence
+      Recomendación: Revisar documentos manualmente
+   ❌ Certificate Freshness: WARNING
+      🟡 certificate_freshness: Verificar manualmente: certificate freshness
+      Recomendación: Revisar documentos manualmente
+
+⚠️ PROBLEMAS DE CONSISTENCIA ENTRE DOCUMENTOS:
+
+   🟠 company_name_consistency: Nombre de empresa inconsistente entre documentos: AZILI SA, AZILI SOCIEDAD ANONIMA, AZILI S.A.
+      Recomendación: Verificar que todos los documentos correspondan a la misma empresa
+   🟠 rut_consistency: RUT inconsistente entre documentos: 21730791.0013, 21.730791.0013, 180529241648, 217307910013
+      Recomendación: Verificar que todos los documentos correspondan al mismo RUT
+
+📚 VERIFICACIÓN DE ARTÍCULOS:
+
+   ❌ Art. 248 - INVALID: Faltan elementos requeridos: company_name, rut_number, legal_representative
+      Elementos: company_name, rut_number, legal_representative
+      Extracto: Art. 248. Certificado notarial es el instrumento público original autorizado por escribano, con el objeto de: a) acreditar la existencia de situaciones jurídica
+   ❌ Art. 249 - INVALID: Faltan elementos requeridos: document_source
+      Elementos: document_source
+      Extracto: Art. 248. Certificado notarial es el instrumento público original autorizado por escribano, con el objeto de: a) acreditar la existencia de situaciones jurídica
+   ❌ Art. 255 - INVALID: Faltan elementos requeridos: destination_entity, validity_dates
+      Elementos: destination_entity, validity_dates
+      Extracto: Art. 248. Certificado notarial es el instrumento público original autorizado por escribano, con el objeto de: a) acreditar la existencia de situaciones jurídica
+   ❌ Art. 250 - INVALID: Faltan elementos requeridos: signature_presence
+      Elementos: signature_presence
+      Extracto: Art. 248. Certificado notarial es el instrumento público original autorizado por escribano, con el objeto de: a) acreditar la existencia de situaciones jurídica
+   ❌ Art. 251 - INVALID: Faltan elementos requeridos: signature_presence
+      Elementos: signature_presence
+      Extracto: Art. 248. Certificado notarial es el instrumento público original autorizado por escribano, con el objeto de: a) acreditar la existencia de situaciones jurídica
+   ❌ Art. 130 - INVALID: Faltan elementos requeridos: identity_verification
+      Elementos: identity_verification
+      Extracto: Art. 130. En toda escritura pública, deberá establecerse: a) El lugar, la fecha y el registro en que se actúa. b) Los nombres y apellidos de los otorgantes y de
+
+❌ NO PUEDE EMITIR CERTIFICADO - 2 PROBLEMAS CRÍTICOS:
+
+   🔴 certificado_bps: Falta documento obligatorio: Certificado de situación de BPS
+      Recomendación: Cargar Certificado de situación de BPS
+   🔴 padron_bps: Falta documento obligatorio: Padrón de funcionarios BPS
+      Recomendación: Cargar Padrón de funcionarios BPS
+--------------------------------------------------------------------------------
+Phase 6
+
+╔══════════════════════════════════════════════════════════════╗
+║              ANÁLISIS DE BRECHAS - FASE 6                    ║
+╚══════════════════════════════════════════════════════════════╝
+
+❌ ESTADO: REQUIERE CORRECCIONES
+
+📊 RESUMEN DE PROBLEMAS:
+   Total de brechas: 9
+   🔴 Urgentes (bloquean emisión): 7
+   🟠 Prioridad alta: 2
+   🟡 Prioridad media: 0
+   🟢 Prioridad baja: 0
+
+   ⚠️  Problemas bloqueantes: 9
+
+🔴 PROBLEMAS URGENTES (7):
+   DEBE CORREGIR ESTOS ANTES DE EMITIR CERTIFICADO
+
+🔴 Falta Certificado de situación de BPS [URGENT]
+   Documento obligatorio no encontrado: Certificado de situación de BPS
+   📄 Documento afectado: Certificado Bps
+   📊 Estado actual: Documento no cargado
+   ✅ Estado requerido: Documento presente y válido
+   🔧 Acción requerida: Cargar Certificado de situación de BPS al sistema
+   ⏰ Plazo: 28/02/2026
+
+🔴 Falta Padrón de funcionarios BPS [URGENT]
+   Documento obligatorio no encontrado: Padrón de funcionarios BPS
+   📄 Documento afectado: Padron Bps
+   📊 Estado actual: Documento no cargado
+   ✅ Estado requerido: Documento presente y válido
+   🔧 Acción requerida: Cargar Padrón de funcionarios BPS al sistema
+   ⏰ Plazo: 28/02/2026
+
+🔴 Revisar documento: Estatuto Azili S.A..pdf [URGENT]
+   Conflicto: tipos de certificado difieren entre LLM y keywords.
+   📊 Estado actual: No verificado
+   ✅ Estado requerido: Verificado por notario o fuente oficial
+   🔧 Acción requerida: Verificar manualmente el documento
+
+🔴 Revisar documento: Certificacion control leyes 18930 y 19484.doc [URGENT]
+   Conflicto: tipos de certificado difieren entre LLM y keywords.
+   📊 Estado actual: No verificado
+   ✅ Estado requerido: Verificado por notario o fuente oficial
+   🔧 Acción requerida: Verificar manualmente el documento
+
+🔴 Revisar documento: BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf [URGENT]
+   Conflicto: tipos de certificado difieren entre LLM y keywords.
+   📊 Estado actual: No verificado
+   ✅ Estado requerido: Verificado por notario o fuente oficial
+   🔧 Acción requerida: Verificar manualmente el documento
+
+🔴 Revisar documento: Declaratoria 17.904.pdf [URGENT]
+   Conflicto: tipos de certificado difieren entre LLM y keywords.
+   📊 Estado actual: No verificado
+   ✅ Estado requerido: Verificado por notario o fuente oficial
+   🔧 Acción requerida: Verificar manualmente el documento
+
+🔴 Revisar documento: BCU AZILI S.A. 2018.06 DDJJ.pdf [URGENT]
+   Conflicto: LLM indica no certificado, keywords indican certificado.; Conflicto entre LLM (no certificado) y keywords (certificado).
+   📊 Estado actual: No verificado
+   ✅ Estado requerido: Verificado por notario o fuente oficial
+   🔧 Acción requerida: Verificar manualmente el documento
+
+🟠 PRIORIDAD ALTA (2):
+
+🟠 Inconsistencia: Company Name Consistency [HIGH]
+   Nombre de empresa inconsistente entre documentos: AZILI SA, AZILI SOCIEDAD ANONIMA, AZILI S.A.
+   📊 Estado actual: Datos inconsistentes entre documentos
+   ✅ Estado requerido: Datos consistentes en todos los documentos
+   🔧 Acción requerida: Verificar que todos los documentos correspondan a la misma empresa
+
+🟠 Inconsistencia: Rut Consistency [HIGH]
+   RUT inconsistente entre documentos: 21730791.0013, 21.730791.0013, 180529241648, 217307910013
+   📊 Estado actual: Datos inconsistentes entre documentos
+   ✅ Estado requerido: Datos consistentes en todos los documentos
+   🔧 Acción requerida: Verificar que todos los documentos correspondan al mismo RUT
+
+
+📄 REPORTE POR DOCUMENTO (4):
+
+   ❌ Cedula Identidad - PRESENTE
+      ⚠️  Documento presente pero con problemas de validación
+      💡 Revisar y corregir problemas listados
+   ❌ Poder - FALTANTE
+   ❌ Certificado Bps - FALTANTE (1 problemas)
+      ⚠️  Documento obligatorio faltante
+      💡 Cargar certificado bps
+      💡 Verificar que documento tenga menos de 30 días
+   ❌ Padron Bps - FALTANTE (1 problemas)
+      ⚠️  Documento obligatorio faltante
+      💡 Cargar padron bps
+      💡 Verificar que documento tenga menos de 30 días
+
+❌ PRÓXIMOS PASOS:
+   1. Corregir problemas urgentes listados arriba
+   2. Re-ejecutar validación (Fase 5)
+   3. Verificar que no hayan problemas bloqueantes
+   4. Proceder a Fase 7
+--------------------------------------------------------------------------------
+Phase 7
+
+======================================================================
+           FASE 7: RESULTADO DE ACTUALIZACIÓN DE DATOS
+======================================================================
+
+📊 RESUMEN DE ACTUALIZACIONES:
+   Total de brechas detectadas: 9
+   Brechas atendidas: 0
+   Actualizaciones exitosas: 0 ✅
+   Actualizaciones fallidas: 0 ❌
+   No intentadas: 0 ⏭️
+
+📁 ESTADO DE COLECCIÓN:
+   Documentos antes: 4
+   Documentos después: 7
+
+⏰ Timestamp: 2026-01-29 10:45:50
+
+
+ℹ️  Fuentes oficiales no configuradas; se requiere verificación manual o carga de documentos.
+
+🔍 DOCUMENTOS PARA REVISIÓN MANUAL:
+----------------------------------------------------------------------
+   • Estatuto Azili S.A..pdf
+     - Conflicto: tipos de certificado difieren entre LLM y keywords.
+   • Certificacion control leyes 18930 y 19484.doc
+     - Conflicto: tipos de certificado difieren entre LLM y keywords.
+   • BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf
+     - Conflicto: tipos de certificado difieren entre LLM y keywords.
+   • Declaratoria 17.904.pdf
+     - Conflicto: tipos de certificado difieren entre LLM y keywords.
+   • BCU AZILI S.A. 2018.06 DDJJ.pdf
+     - Conflicto: LLM indica no certificado, keywords indican certificado.
+     - Conflicto entre LLM (no certificado) y keywords (certificado).
+
+======================================================================
+
+--------------------------------------------------------------------------------
+Phase 8
+
+======================================================================
+           FASE 8: CONFIRMACIÓN LEGAL FINAL
+======================================================================
+
+❌ DECISIÓN: REJECTED
+🔴 NIVEL DE CUMPLIMIENTO: NON COMPLIANT
+
+📊 RESUMEN DE VERIFICACIONES:
+   Total de verificaciones: 9
+   Verificaciones exitosas: 1 ✅
+   Verificaciones fallidas: 8 ❌
+
+   Problemas bloqueantes: 7 🚫
+   Problemas críticos: 6 🔴
+   Advertencias: 1 🟡
+
+📋 RATIONALE:
+Certificado rechazado: 7 problema(s) bloqueante(s), 6 problema(s) crítico(s). Debe resolver estos problemas antes de generar certificado.
+
+⏰ Timestamp: 2026-01-29 10:45:50
+👤 Validado por: Sistema Automatizado
+
+
+======================================================================
+❌ CERTIFICADO RECHAZADO
+======================================================================
+
+Problemas que deben ser resueltos:
+  • Documentos requeridos presentes: 2 documento(s) faltante(s)
+  • Elementos requeridos presentes: 6 elemento(s) faltante(s)
+  • Consistencia de datos: 2 inconsistencia(s) detectada(s)
+  • Sin problemas críticos: 2 problema(s) crítico(s)
+  • Brechas urgentes resueltas: 2 brecha(s) urgente(s) sin resolver
+  • Requisitos BPS: 2 requisito(s) institucional(es) no cumplido(s)
+  • Cumplimiento de Artículos 248-255: Artículos no cumplidos
+
+No puede proceder a Fase 9 hasta resolver estos problemas.
+
+======================================================================
+
+--------------------------------------------------------------------------------
+Phase 9
+Skipped: Phase 8 did not approve certificate generation.
+--------------------------------------------------------------------------------
+Phase 10
+Skipped: Phase 9 was not generated.
+--------------------------------------------------------------------------------
+Phase 11
+Skipped: Phase 10 was not approved.
+--------------------------------------------------------------------------------

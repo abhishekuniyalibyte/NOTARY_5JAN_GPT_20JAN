@@ -1,0 +1,384 @@
+Notarial Chatbot Flow - Document Analysis Report
+Generated: 2026-01-27T12:56:45
+Total files: 7
+
+Details: 1.pdf
+Type: personeria_representacion_representacion (source: content)
+Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
+Detected type (filename): 
+File info: format=pdf, size_bytes=4386180, processing_status=indexed, is_scanned=False
+Validation: unknown - No validation available.
+Error flag: yes
+Error reasons:
+[
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+]
+Dataset match:
+correct: Matched attributes: domicilio, ley, poder (confidence 0.5)
+Match details:
+{
+  "status": "correct",
+  "match_type": "content_keywords",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, poder",
+  "matches": [],
+  "llm_result": {
+    "status": "error",
+    "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  },
+  "keyword_result": {
+    "status": "ok",
+    "is_certificate": true,
+    "certificate_type": "personeria_representacion_representacion",
+    "purpose": "bse",
+    "confidence": 0.5,
+    "reason": "Matched attributes: domicilio, ley, poder"
+  }
+}
+LLM classification:
+{
+  "status": "error",
+  "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+}
+Keyword classification:
+{
+  "status": "ok",
+  "is_certificate": true,
+  "certificate_type": "personeria_representacion_representacion",
+  "purpose": "bse",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, poder"
+}
+--------------------------------------------------------------------------------
+Details: 2.pdf
+Type: personeria_representacion_representacion (source: content)
+Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.40, ok)
+Detected type (filename): 
+File info: format=pdf, size_bytes=1023979, processing_status=indexed, is_scanned=False
+Validation: unknown - No validation available.
+Error flag: yes
+Error reasons:
+[
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+]
+Dataset match:
+correct: Matched attributes: domicilio, ley (confidence 0.4)
+Match details:
+{
+  "status": "correct",
+  "match_type": "content_keywords",
+  "confidence": 0.4,
+  "reason": "Matched attributes: domicilio, ley",
+  "matches": [],
+  "llm_result": {
+    "status": "error",
+    "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  },
+  "keyword_result": {
+    "status": "ok",
+    "is_certificate": true,
+    "certificate_type": "personeria_representacion_representacion",
+    "purpose": "registro",
+    "confidence": 0.4,
+    "reason": "Matched attributes: domicilio, ley"
+  }
+}
+LLM classification:
+{
+  "status": "error",
+  "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+}
+Keyword classification:
+{
+  "status": "ok",
+  "is_certificate": true,
+  "certificate_type": "personeria_representacion_representacion",
+  "purpose": "registro",
+  "confidence": 0.4,
+  "reason": "Matched attributes: domicilio, ley"
+}
+--------------------------------------------------------------------------------
+Details: 3.doc
+Type: otros (source: content)
+Type detail: selected=otros; source=content; detected=n/a; llm=n/a (n/a, error); keyword=otros (0.40, ok)
+Detected type (filename): 
+File info: format=doc, size_bytes=35840, processing_status=indexed, is_scanned=False
+Validation: unknown - No validation available.
+Error flag: yes
+Error reasons:
+[
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+]
+Dataset match:
+correct: Matched attributes: ley, leyes (confidence 0.4)
+Match details:
+{
+  "status": "correct",
+  "match_type": "content_keywords",
+  "confidence": 0.4,
+  "reason": "Matched attributes: ley, leyes",
+  "matches": [],
+  "llm_result": {
+    "status": "error",
+    "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  },
+  "keyword_result": {
+    "status": "ok",
+    "is_certificate": true,
+    "certificate_type": "otros",
+    "purpose": "",
+    "confidence": 0.4,
+    "reason": "Matched attributes: ley, leyes"
+  }
+}
+LLM classification:
+{
+  "status": "error",
+  "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+}
+Keyword classification:
+{
+  "status": "ok",
+  "is_certificate": true,
+  "certificate_type": "otros",
+  "purpose": "",
+  "confidence": 0.4,
+  "reason": "Matched attributes: ley, leyes"
+}
+--------------------------------------------------------------------------------
+Details: 4.doc
+Type: personeria_representacion_representacion (source: content)
+Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
+Detected type (filename): 
+File info: format=doc, size_bytes=37888, processing_status=indexed, is_scanned=False
+Validation: unknown - No validation available.
+Error flag: yes
+Error reasons:
+[
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+]
+Dataset match:
+correct: Matched attributes: domicilio, ley, leyes (confidence 0.5)
+Match details:
+{
+  "status": "correct",
+  "match_type": "content_keywords",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, leyes",
+  "matches": [],
+  "llm_result": {
+    "status": "error",
+    "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  },
+  "keyword_result": {
+    "status": "ok",
+    "is_certificate": true,
+    "certificate_type": "personeria_representacion_representacion",
+    "purpose": "registro",
+    "confidence": 0.5,
+    "reason": "Matched attributes: domicilio, ley, leyes"
+  }
+}
+LLM classification:
+{
+  "status": "error",
+  "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+}
+Keyword classification:
+{
+  "status": "ok",
+  "is_certificate": true,
+  "certificate_type": "personeria_representacion_representacion",
+  "purpose": "registro",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, leyes"
+}
+--------------------------------------------------------------------------------
+Details: 5.pdf
+Type: personeria_representacion_representacion (source: content)
+Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.50, ok)
+Detected type (filename): 
+File info: format=pdf, size_bytes=1622377, processing_status=indexed, is_scanned=False
+Validation: unknown - No validation available.
+Error flag: yes
+Error reasons:
+[
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+]
+Dataset match:
+correct: Matched attributes: domicilio, ley, poder (confidence 0.5)
+Match details:
+{
+  "status": "correct",
+  "match_type": "content_keywords",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, poder",
+  "matches": [],
+  "llm_result": {
+    "status": "error",
+    "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  },
+  "keyword_result": {
+    "status": "ok",
+    "is_certificate": true,
+    "certificate_type": "personeria_representacion_representacion",
+    "purpose": "registro",
+    "confidence": 0.5,
+    "reason": "Matched attributes: domicilio, ley, poder"
+  }
+}
+LLM classification:
+{
+  "status": "error",
+  "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+}
+Keyword classification:
+{
+  "status": "ok",
+  "is_certificate": true,
+  "certificate_type": "personeria_representacion_representacion",
+  "purpose": "registro",
+  "confidence": 0.5,
+  "reason": "Matched attributes: domicilio, ley, poder"
+}
+--------------------------------------------------------------------------------
+Details: 6.pdf
+Type: personeria_representacion_representacion (source: content)
+Type detail: selected=personeria_representacion_representacion; source=content; detected=n/a; llm=n/a (n/a, error); keyword=personeria_representacion_representacion (0.80, ok)
+Detected type (filename): 
+File info: format=pdf, size_bytes=7967354, processing_status=indexed, is_scanned=False
+Validation: unknown - No validation available.
+Error flag: yes
+Error reasons:
+[
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+]
+Dataset match:
+correct: Matched attributes: domicilio, domicilios, ley, objeto, poder, poderes (confidence 0.8)
+Match details:
+{
+  "status": "correct",
+  "match_type": "content_keywords",
+  "confidence": 0.8,
+  "reason": "Matched attributes: domicilio, domicilios, ley, objeto, poder, poderes",
+  "matches": [],
+  "llm_result": {
+    "status": "error",
+    "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  },
+  "keyword_result": {
+    "status": "ok",
+    "is_certificate": true,
+    "certificate_type": "personeria_representacion_representacion",
+    "purpose": "bse",
+    "confidence": 0.8,
+    "reason": "Matched attributes: domicilio, domicilios, ley, objeto, poder, poderes"
+  }
+}
+LLM classification:
+{
+  "status": "error",
+  "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+}
+Keyword classification:
+{
+  "status": "ok",
+  "is_certificate": true,
+  "certificate_type": "personeria_representacion_representacion",
+  "purpose": "bse",
+  "confidence": 0.8,
+  "reason": "Matched attributes: domicilio, domicilios, ley, objeto, poder, poderes"
+}
+--------------------------------------------------------------------------------
+Details: 7.pdf
+Type: unknown (source: content_missing)
+Type detail: selected=unknown; source=content_missing; detected=n/a; llm=n/a (n/a, error); keyword=n/a (n/a, error)
+Detected type (filename): 
+File info: format=pdf, size_bytes=141460, processing_status=indexed, is_scanned=False
+Validation: unknown - No validation available.
+Error flag: yes
+Error reasons:
+[
+  "llm_extraction_error: Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+]
+Dataset match:
+needs_review: No strong match found in certificate_summary.json. Requiere verificación manual. (confidence 0.0)
+Match details:
+{
+  "status": "needs_review",
+  "match_type": "none",
+  "confidence": 0.0,
+  "reason": "No strong match found in certificate_summary.json. Requiere verificación manual.",
+  "matches": [],
+  "suggestions": {
+    "filename": [
+      [
+        "27369.pdf",
+        0.7142857142857143
+      ],
+      [
+        "BPS.pdf",
+        0.6666666666666666
+      ],
+      [
+        "CUD.PDF",
+        0.6666666666666666
+      ],
+      [
+        "DGI.pdf",
+        0.6666666666666666
+      ],
+      [
+        "RUT.pdf",
+        0.6666666666666666
+      ]
+    ],
+    "customer": [
+      [
+        "Azili SA",
+        0.9411764705882353
+      ],
+      [
+        "PISCUS SA",
+        0.4444444444444444
+      ],
+      [
+        "Inversora Rinlen SA",
+        0.42857142857142855
+      ],
+      [
+        "Nubegris SA",
+        0.4
+      ],
+      [
+        "Frainel",
+        0.375
+      ]
+    ]
+  },
+  "llm_result": {
+    "status": "error",
+    "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+  },
+  "keyword_result": {
+    "status": "error",
+    "message": "No keyword match found."
+  }
+}
+Review required: yes
+Review reasons:
+[
+  "No se pudo clasificar por contenido.",
+  "No strong match found in certificate_summary.json. Requiere verificación manual."
+]
+LLM classification:
+{
+  "status": "error",
+  "message": "Groq request failed: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}"
+}
+Keyword classification:
+{
+  "status": "error",
+  "message": "No keyword match found."
+}
+--------------------------------------------------------------------------------

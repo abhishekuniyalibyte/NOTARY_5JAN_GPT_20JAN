@@ -1,0 +1,68 @@
+Notarial Chatbot Flow - Short Summary
+Generated: 2026-01-28T12:42:59
+============================================================
+SUMMARY OF ANALYSIS
+--------------------
+Subject: AZILI SOCIEDAD ANONIMA
+Total Files Processed: 9
+Documents Found: firma, firma_representacion_representacion, non_certificate, personeria, personeria_representacion_representacion, unknown
+Status: ATTENTION REQUIRED
+
+Errors Found: Yes (3 files affected)
+Missing Required Documents: Certificado de situación de BPS, Padrón de funcionarios BPS
+============================================================
+
+File: ERROR Certificacion control leyes 18930 y 19484.pages
+Subject: AZILI SOCIEDAD ANONIMA
+Type: unknown
+Status: UNKNOWN
+Errors: Yes
+--------------------
+File: Estatuto Azili S.A..pdf
+Subject: AZILI SOCIEDAD ANONIMA
+Type: firma_representacion_representacion
+Status: NOT_REQUIRED
+Errors: No
+--------------------
+File: Certificacion personeria, representación, leyes.doc
+Subject: AZILI SOCIEDAD ANONIMA
+Type: personeria_representacion_representacion
+Status: INVALID
+Errors: Yes
+--------------------
+File: ERROR Certificacion personeria, representación, leyes.pages
+Subject: AZILI SOCIEDAD ANONIMA
+Type: unknown
+Status: UNKNOWN
+Errors: Yes
+--------------------
+File: Certificacion control leyes 18930 y 19484.doc
+Subject: AZILI SOCIEDAD ANONIMA
+Type: personeria
+Status: NOT_REQUIRED
+Errors: No
+--------------------
+File: factura_9148035_PDF DGI (1).pdf
+Subject: AZILI SOCIEDAD ANONIMA
+Type: non_certificate
+Status: NOT_REQUIRED
+Errors: No
+--------------------
+File: BCU AZILI S.A. 2018.06 DDJJ Acuse BCU.pdf
+Subject: AZILI SOCIEDAD ANONIMA
+Type: firma
+Status: NOT_REQUIRED
+Errors: No
+--------------------
+File: Declaratoria 17.904.pdf
+Subject: AZILI SOCIEDAD ANONIMA
+Type: firma_representacion_representacion
+Status: NOT_REQUIRED
+Errors: No
+--------------------
+File: BCU AZILI S.A. 2018.06 DDJJ.pdf
+Subject: AZILI SOCIEDAD ANONIMA
+Type: non_certificate
+Status: NOT_REQUIRED
+Errors: No
+--------------------
